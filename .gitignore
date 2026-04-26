@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# opencode / ai tools
+.opencode/
+
+# scraper / dev tools
+envato.html
+envato_img.jpg
+extract_envato.py
+freepik.html
+get_envato.py
+get_googlebot.py
+get_img.py
+get_img_puppeteer.js
+screenshot.jpg
