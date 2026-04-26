@@ -164,7 +164,7 @@ export default function Hero() {
             <ScrollReveal delay={0.15} direction="right" duration={0.8}>
               <div className="relative">
                 <div className="absolute inset-0 bg-tt-green/8 blur-3xl rounded-full scale-110 pointer-events-none" />
-                <div className="relative animate-float" style={{ animationDuration: '6s' }}>
+                <div className="relative animate-float">
                   <Image
                     src="/images/panda-bento.png"
                     alt="Tiny Tummies mascot with healthy bento meal"

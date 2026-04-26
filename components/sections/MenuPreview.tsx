@@ -152,8 +152,7 @@ export default function MenuPreview() {
 
         {/* Mobile: horizontal swipe */}
         <div
-          className="md:hidden flex gap-3 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="md:hidden flex gap-3 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 scrollbar-hide"
         >
           {menuDays.map((day) => {
             const c = colorMap[day.color];
