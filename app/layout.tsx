@@ -1,6 +1,16 @@
 import type { Metadata } from "next";
-import { Nunito, Inter } from "next/font/google";
+import { Nunito, Inter, Geist, Baloo_2 } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+
+const baloo = Baloo_2({
+  variable: "--font-baloo",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -28,6 +38,11 @@ export const metadata: Metadata = {
     "meal delivery school",
     "Tiny Tummies",
   ],
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/logo.png",
+  },
   openGraph: {
     title: "Tiny Tummies — Little Tummies, Big Nutrition",
     description:
@@ -45,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunito.variable} ${inter.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", baloo.variable, nunito.variable, inter.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

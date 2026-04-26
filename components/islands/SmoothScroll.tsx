@@ -1,61 +1,83 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Lenis from "lenis";
+import { ReactLenis, useLenis } from "lenis/react";
+import Snap from "lenis/snap";
 
-export default function SmoothScroll({ children }: { children: React.ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null);
+function SnapInitializer() {
+  const lenis = useLenis();
+  const snapRef = useRef<Snap | null>(null);
+  const initAttempts = useRef(0);
 
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 2,
-      infinite: false,
-    });
+    if (!lenis) return;
 
-    lenisRef.current = lenis;
+    const initSnap = () => {
+      // Try multiple selectors to find sections
+      const sections = Array.from(
+        document.querySelectorAll("main > section")
+      ).filter((el): el is HTMLElement => el instanceof HTMLElement);
 
-    // Snap to sections
-    lenis.on("scroll", (e: { velocity: number; targetScroll: number }) => {
-      const sections = document.querySelectorAll("main > section, main > footer");
-      const windowHeight = window.innerHeight;
-      
-      // Only snap when velocity is low (user stopped scrolling)
-      if (Math.abs(e.velocity) < 0.5) {
-        let closestSection: Element | null = null;
-        let closestDistance = Infinity;
-        
-        sections.forEach((section) => {
-          const rect = section.getBoundingClientRect();
-          const sectionCenter = rect.top + rect.height / 2;
-          const viewportCenter = windowHeight / 2;
-          const distance = Math.abs(sectionCenter - viewportCenter);
-          
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestSection = section;
-          }
-        });
-        
-        if (closestSection && closestDistance > 50) {
-          const target = closestSection as HTMLElement;
-          lenis.scrollTo(target, { offset: 0, duration: 0.8 });
+      if (sections.length === 0) {
+        initAttempts.current++;
+        if (initAttempts.current < 10) {
+          setTimeout(initSnap, 200);
         }
+        return;
       }
-    });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+      // Destroy previous snap if exists
+      if (snapRef.current) {
+        snapRef.current.destroy();
+      }
 
-    requestAnimationFrame(raf);
+      const snap = new Snap(lenis, {
+        type: "mandatory",
+        lerp: 0.1,
+        duration: 0.8,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+
+      snap.addElements(sections, {
+        align: "start",
+      });
+
+      snapRef.current = snap;
+    };
+
+    // Delay to ensure DOM + Lenis are fully ready
+    const timer = setTimeout(initSnap, 300);
 
     return () => {
-      lenis.destroy();
+      clearTimeout(timer);
+      if (snapRef.current) {
+        snapRef.current.destroy();
+        snapRef.current = null;
+      }
     };
-  }, []);
+  }, [lenis]);
 
-  return <>{children}</>;
+  return null;
+}
+
+export default function SmoothScroll({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <ReactLenis
+      root
+      options={{
+        lerp: 0.08,
+        smoothWheel: true,
+        syncTouch: false,
+        autoRaf: true,
+        anchors: true,
+      }}
+    >
+      <SnapInitializer />
+      {children}
+    </ReactLenis>
+  );
 }

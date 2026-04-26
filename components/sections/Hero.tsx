@@ -3,8 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import ScrollReveal from "@/components/islands/ScrollReveal";
-import Button from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 const trustPills = [
   {
@@ -17,6 +16,9 @@ const trustPills = [
       </svg>
     ),
     text: "5 Days/Week",
+    bg: "bg-tt-sky/15",
+    border: "border-tt-sky/25",
+    iconC: "text-tt-sky",
   },
   {
     icon: (
@@ -25,6 +27,9 @@ const trustPills = [
       </svg>
     ),
     text: "100% Vegetarian",
+    bg: "bg-tt-lime/15",
+    border: "border-tt-lime/25",
+    iconC: "text-tt-lime",
   },
   {
     icon: (
@@ -38,6 +43,9 @@ const trustPills = [
       </svg>
     ),
     text: "School Delivery",
+    bg: "bg-tt-sunny/15",
+    border: "border-tt-sunny/25",
+    iconC: "text-tt-sunny-dark",
   },
   {
     icon: (
@@ -49,26 +57,35 @@ const trustPills = [
       </svg>
     ),
     text: "Kid-Approved",
+    bg: "bg-tt-bubblegum/15",
+    border: "border-tt-bubblegum/25",
+    iconC: "text-tt-bubblegum",
   },
 ];
 
-function TrustPills() {
-  return (
-    <div className="mt-4 md:mt-6 flex flex-wrap items-center justify-center md:justify-start gap-2">
-      {trustPills.map((pill) => (
-        <div
-          key={pill.text}
-          className="flex items-center gap-1.5 bg-white/90 rounded-full px-3 py-1.5 shadow-sm border border-tt-green/10 cursor-default"
-        >
-          <span className="text-tt-green shrink-0">{pill.icon}</span>
-          <span className="text-tt-green-deep font-display font-semibold text-xs whitespace-nowrap">
-            {pill.text}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
+const bannerItems = [
+  { icon: "📅", text: "5 Days a Week" },
+  { icon: "🥬", text: "100% Vegetarian" },
+  { icon: "🏫", text: "School Delivery" },
+  { icon: "👨‍🍳", text: "Chef-Prepared Fresh" },
+  { icon: "😊", text: "Kid-Approved" },
+  { icon: "🌿", text: "No Preservatives" },
+  { icon: "📦", text: "Eco Packaging" },
+  { icon: "💚", text: "Balanced Nutrition" },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+};
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -77,107 +94,198 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const mascotY = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const mascotY = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const blobY = useTransform(scrollYProgress, [0, 1], [0, 60]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-[100svh] flex flex-col overflow-hidden bg-[linear-gradient(135deg,#FFF8E7_0%,#FFEFC2_50%,#FFF4CC_100%)]"
+      className="relative h-[100svh] flex flex-col overflow-hidden bg-tt-warm"
     >
-      {/* Parallax background blob */}
+      {/* Background gradient blob behind mascot */}
       <motion.div
-        className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-tt-green/5 rounded-full blur-3xl pointer-events-none"
-        style={{ y: bgY }}
-      />
-      <motion.div
-        className="absolute bottom-[10%] left-[5%] w-[300px] h-[300px] bg-tt-orange/5 rounded-full blur-3xl pointer-events-none"
-        style={{ y: bgY }}
+        className="absolute top-[5%] right-[3%] w-[450px] h-[450px] md:w-[550px] md:h-[550px] lg:w-[650px] lg:h-[650px] rounded-full pointer-events-none"
+        style={{
+          y: blobY,
+          background: "radial-gradient(circle, rgba(251,191,36,0.18) 0%, rgba(244,114,182,0.1) 45%, rgba(56,189,248,0.06) 70%, transparent 100%)",
+          filter: "blur(50px)",
+        }}
       />
 
-      <div className="relative z-10 mx-auto max-w-[1200px] px-4 md:px-8 w-full flex flex-col h-full">
+      {/* Accent blob top-left */}
+      <motion.div
+        className="absolute top-[12%] left-[6%] w-[150px] h-[150px] rounded-full pointer-events-none"
+        style={{
+          y: blobY,
+          background: "radial-gradient(circle, rgba(132,204,22,0.1) 0%, transparent 70%)",
+          filter: "blur(30px)",
+        }}
+      />
+
+      {/* Floating decorations */}
+      <motion.div
+        className="absolute top-[18%] left-[10%] w-4 h-4 text-tt-sunny/20 pointer-events-none"
+        animate={{ rotate: 360, y: [0, -5, 0] }}
+        transition={{ rotate: { duration: 18, repeat: Infinity, ease: "linear" }, y: { duration: 3.5, repeat: Infinity, ease: "easeInOut" } }}
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+      </motion.div>
+
+      <motion.div
+        className="absolute top-[28%] right-[28%] w-2.5 h-2.5 text-tt-bubblegum/15 pointer-events-none"
+        animate={{ y: [0, -8, 0], scale: [1, 1.15, 1] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" /></svg>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-[18%] left-[15%] w-3 h-3 text-tt-lime/12 pointer-events-none"
+        animate={{ y: [0, -6, 0], rotate: [0, 180, 360] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+      </motion.div>
+
+      <div className="relative z-10 w-full flex flex-col h-full">
         {/* Navbar spacer */}
         <div className="h-14 md:h-16 shrink-0" />
 
-        {/* Main hero content */}
-        <div className="flex-1 flex flex-col-reverse md:flex-row items-center justify-center gap-6 md:gap-10 lg:gap-12 min-h-0 py-4 md:py-0">
-          {/* Left — Text content with parallax */}
+        {/* Main two-column layout */}
+        <div className="flex-1 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16 min-h-0 py-2 md:py-0 px-4 md:px-8 lg:px-16 max-w-[1400px] mx-auto w-full">
+          {/* LEFT: Text content */}
           <motion.div
-            className="flex flex-col items-center md:items-start text-center md:text-left md:w-[55%] lg:w-[52%] shrink-0 z-10"
-            style={{ y: textY }}
+            className="flex flex-col items-center md:items-start text-center md:text-left md:w-[52%] lg:w-[50%] shrink-0 md:pl-4 lg:pl-8"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
           >
-            <ScrollReveal delay={0}>
+            {/* Headline */}
+            <motion.div variants={fadeUp}>
               <h1 className="font-display font-extrabold leading-[1.08] tracking-tight text-tt-green-deep">
-                <span className="block text-3xl sm:text-4xl md:text-[2.8rem] lg:text-[3.4rem]">Struggling to Make</span>
-                <span className="block text-3xl sm:text-4xl md:text-[2.8rem] lg:text-[3.4rem]">Your Child Eat</span>
-                <span className="block text-3xl sm:text-4xl md:text-[2.8rem] lg:text-[3.4rem] text-tt-orange">Healthy?</span>
+                <span className="block text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[3rem]">Struggling to Make</span>
+                <span className="block text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[3rem]">Your Child Eat</span>
+                <span className="block text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[3rem] bg-gradient-to-r from-tt-orange via-tt-tomato to-tt-bubblegum bg-clip-text text-transparent">Healthy?</span>
               </h1>
-            </ScrollReveal>
+            </motion.div>
 
-            <ScrollReveal delay={0.1}>
-              <div className="mt-3 md:mt-4 inline-flex items-center gap-2 bg-tt-orange text-white font-display font-bold text-xs md:text-sm px-4 py-2 rounded-full shadow-md">
+            {/* Agitation */}
+            <motion.div variants={fadeUp}>
+              <p className="mt-2 md:mt-3 text-tt-text-secondary font-body text-sm md:text-[0.95rem] max-w-lg leading-relaxed">
+                Every morning, the same battle. Wasted food. Guilt. Stress.
+              </p>
+            </motion.div>
+
+            {/* Solution badge */}
+            <motion.div variants={fadeUp}>
+              <div className="mt-2 md:mt-3 inline-flex items-center gap-2 bg-gradient-to-r from-tt-green to-tt-lime text-white font-display font-bold text-xs md:text-sm px-4 py-1.5 rounded-full shadow-md">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
                   <path d="M20 6L9 17l-5-5" />
                 </svg>
-                We&apos;ve got it covered!
+                Tiny Tummies Makes Healthy Fun
               </div>
-            </ScrollReveal>
+            </motion.div>
 
-            <ScrollReveal delay={0.2}>
-              <p className="mt-3 md:mt-4 text-tt-green-dark/80 font-body text-sm md:text-base max-w-md leading-relaxed">
-                Fresh, balanced vegetarian meals delivered to school — Monday to Saturday. No more morning stress, no more wasted food.
+            {/* Description */}
+            <motion.div variants={fadeUp}>
+              <p className="mt-2 md:mt-3 text-tt-green-dark/70 font-body text-sm md:text-[0.95rem] max-w-lg leading-relaxed">
+                Fresh, balanced vegetarian meals delivered to school — Monday to Saturday.
               </p>
-            </ScrollReveal>
+            </motion.div>
 
-            <ScrollReveal delay={0.3}>
-              <div className="mt-4 md:mt-5 flex flex-col sm:flex-row items-center md:items-start gap-3">
+            {/* CTAs */}
+            <motion.div variants={fadeUp}>
+              <div className="mt-3 md:mt-4 flex flex-col sm:flex-row items-center md:items-start gap-2.5">
                 <Button
                   href="https://docs.google.com/forms/d/e/1FAIpQLSegxxacmX0Udhjpdl_7lcsMVtiVaudhonyVKcfnNwJ9j4-tTA/viewform"
-                  variant="glow-orange"
+                  variant="gradient-cta"
                   size="lg"
-                  className="text-sm md:text-base px-6 md:px-8 py-3"
+                  className="text-sm md:text-base px-6 md:px-7 py-2.5"
                 >
                   Get Started — Free Trial
                 </Button>
                 <Button
                   href="https://wa.me/917975465679"
-                  variant="whatsapp"
+                  variant="gradient-green"
                   size="lg"
-                  className="text-sm md:text-base px-6 md:px-8 py-3"
+                  className="text-sm md:text-base px-6 md:px-7 py-2.5"
                 >
                   Chat on WhatsApp
                 </Button>
               </div>
-            </ScrollReveal>
+            </motion.div>
 
-            <ScrollReveal delay={0.4}>
-              <TrustPills />
-            </ScrollReveal>
+            {/* Trust pills */}
+            <motion.div variants={fadeUp}>
+              <div className="mt-3 md:mt-4 flex flex-wrap items-center justify-center md:justify-start gap-1.5">
+                {trustPills.map((pill, i) => (
+                  <motion.div
+                    key={pill.text}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.6 + i * 0.07, type: "spring", stiffness: 300, damping: 20 }}
+                    className={`flex items-center gap-1 ${pill.bg} ${pill.border} rounded-full px-2.5 py-1 shadow-sm border cursor-default`}
+                  >
+                    <span className={pill.iconC}>{pill.icon}</span>
+                    <span className="font-display font-semibold text-[11px] whitespace-nowrap text-tt-green-deep/70">
+                      {pill.text}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Right — Mascot visual with parallax */}
+          {/* RIGHT: Mascot */}
           <motion.div
-            className="relative flex items-center justify-center shrink-0 md:w-[45%] lg:w-[48%]"
+            className="relative flex items-center justify-center shrink-0 md:w-[48%] lg:w-[50%]"
             style={{ y: mascotY }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.25, duration: 0.6 }}
           >
-            <ScrollReveal delay={0.15} direction="right" duration={0.8}>
-              <div className="relative">
-                <div className="absolute inset-0 bg-tt-green/8 blur-3xl rounded-full scale-110 pointer-events-none" />
-                <div className="relative animate-float">
-                  <Image
-                    src="/images/panda-bento.png"
-                    alt="Tiny Tummies mascot with healthy bento meal"
-                    width={400}
-                    height={400}
-                    className="object-contain w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[360px] md:h-[360px] lg:w-[400px] lg:h-[400px] drop-shadow-xl"
-                    priority
-                  />
-                </div>
+            <div className="relative">
+              {/* Glow behind mascot */}
+              <div className="absolute inset-[-15%] bg-gradient-to-br from-tt-sunny/20 via-tt-bubblegum/12 to-tt-sky/10 blur-2xl rounded-full" />
+              {/* Mascot image */}
+              <div className="relative animate-float">
+                <Image
+                  src="/images/panda-bento.png"
+                  alt="Tiny Tummies mascot with healthy bento meal"
+                  width={480}
+                  height={480}
+                  className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] lg:w-[440px] lg:h-[440px] drop-shadow-2xl"
+                  priority
+                />
               </div>
-            </ScrollReveal>
+            </div>
           </motion.div>
         </div>
+
+        {/* Scrolling trust banner - full width, inside 100vh */}
+        <motion.div
+          className="shrink-0 w-full py-2.5 md:py-3 bg-gradient-to-r from-tt-green/5 via-tt-sunny/5 to-tt-bubblegum/5 border-t border-tt-green/10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.5 }}
+        >
+          <div className="flex overflow-hidden px-4 md:px-8">
+            <motion.div
+              className="flex items-center gap-6 md:gap-10"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            >
+              {[...bannerItems, ...bannerItems].map((item, i) => (
+                <div key={i} className="flex items-center gap-1.5 shrink-0">
+                  <span className="text-base md:text-lg">{item.icon}</span>
+                  <span className="font-display font-semibold text-xs md:text-sm text-tt-green-deep/60 whitespace-nowrap">
+                    {item.text}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
