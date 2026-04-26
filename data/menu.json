@@ -1,0 +1,84 @@
+{
+  "menu": [
+    {
+      "id": "monday",
+      "day": "Monday",
+      "theme": "Mini Munch",
+      "name": "Soft Mini Idlis + Chutney",
+      "kidDescription": "Tiny fluffy idlis with coconut chutney and sweet watermelon — a perfect start to the week!",
+      "parentDescription": "Steamed rice idlis with coconut chutney. Low oil, easily digestible, rich in carbs. Fresh watermelon for hydration & vitamins.",
+      "tags": ["Vegetarian", "Nut-Free"]
+    },
+    {
+      "id": "tuesday",
+      "day": "Tuesday",
+      "theme": "Energy Boost",
+      "name": "Poha / Semiya Upma",
+      "kidDescription": "Fluffy poha or yummy upma with crunchy corn salad and tropical fruit — energy for the whole day!",
+      "parentDescription": "Flattened rice or vermicelli upma with peanuts & curry leaves. Corn salad for fiber. Tropical fruit for Vitamin C.",
+      "tags": ["Vegetarian", "High-Protein"]
+    },
+    {
+      "id": "wednesday",
+      "day": "Wednesday",
+      "theme": "Power Pocket",
+      "name": "Aloo Paratha Pockets",
+      "kidDescription": "Crispy paratha pockets stuffed with yummy potato, cool curd, and sweet banana bites — power packed!",
+      "parentDescription": "Whole wheat aloo paratha with fresh curd for probiotics & calcium. Banana for potassium & instant energy.",
+      "tags": ["Vegetarian", "Kid-Favorite"]
+    },
+    {
+      "id": "thursday",
+      "day": "Thursday",
+      "theme": "Dosa Delight",
+      "name": "Mini Dosas + Chutney",
+      "kidDescription": "Crispy mini dosas with coconut chutney and juicy seasonal fruit — a South Indian treat!",
+      "parentDescription": "Fermented rice-lentil dosas with coconut chutney. Rich in protein & gut-friendly probiotics. Seasonal fruit for vitamins.",
+      "tags": ["Vegetarian", "Nut-Free"]
+    },
+    {
+      "id": "friday",
+      "day": "Friday",
+      "theme": "Desi Lunch",
+      "name": "Lemon Rice",
+      "kidDescription": "Tangy lemon rice with crunchy sprouts and a fresh veggie salad — Friday feels special!",
+      "parentDescription": "Lemon-flavored rice with peanuts & turmeric. Sprouts mix for plant protein. Raw salad for fiber & hydration.",
+      "tags": ["Vegetarian", "Nut-Free"]
+    },
+    {
+      "id": "saturday",
+      "day": "Saturday",
+      "theme": "Treat Day",
+      "name": "Veg Sandwich",
+      "kidDescription": "A yummy veggie sandwich with ketchup dip — the perfect weekend treat to end the week!",
+      "parentDescription": "Whole wheat sandwich with mixed veggies & cheese. Ketchup for fun. Balanced carbs, protein & calcium.",
+      "tags": ["Vegetarian", "Kid-Favorite"]
+    }
+  ],
+  "plans": [
+    {
+      "id": "starter",
+      "name": "Starter Munch Plan",
+      "mealsPerWeek": 5,
+      "price": "₹599",
+      "originalPrice": "₹665",
+      "period": "week",
+      "pricePerMeal": "₹120",
+      "description": "5 days of fresh fruit & veggie servings. Perfect for trying us out.",
+      "features": ["5 days of fruit & veggie servings", "Fresh & high quality produce", "Flexible scheduling", "Cancel anytime"],
+      "launchTag": "Limited Early Bird Access"
+    },
+    {
+      "id": "growth",
+      "name": "Growth Munch Plan",
+      "mealsPerWeek": 22,
+      "price": "₹1,499",
+      "originalPrice": "₹1,665",
+      "period": "month",
+      "pricePerMeal": "₹68",
+      "description": "20-22 days of daily curated fruits & veggies. Full month coverage with consistent nutrition.",
+      "features": ["20-22 days monthly", "Daily curated fruits & veggies", "Priority delivery", "Daily variety — no boredom", "Free surprise treat on Fridays"],
+      "launchTag": "First 50 Subscribers"
+    }
+  ]
+}
