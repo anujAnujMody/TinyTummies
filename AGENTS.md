@@ -1,7 +1,7 @@
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+Breaking changes — APIs, conventions, file structure may differ from training data. Read relevant guide in `node_modules/next/dist/docs/` before writing code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
 # Project Context
@@ -15,7 +15,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - Lenis 1.x (smooth scroll)
 
 ## Architecture
-- `app/` — App Router (Server Components by default)
+- `app/` — App Router (Server Components default)
 - `components/sections/` — Page sections (Hero, Pricing, etc.)
 - `components/ui/` — Reusable UI primitives (Button, Badge, etc.)
 - `components/islands/` — Client Component wrappers (SmoothScroll, ScrollReveal)
@@ -23,15 +23,15 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - `public/` — Static assets (images, logos, mascots)
 
 ## Key Conventions
-- Default to Server Components; add `"use client"` only for interactivity
-- Use `next/image` for all images with proper width/height/alt
-- Use `next/font` for custom fonts (Nunito, Inter)
+- Server Components default; `"use client"` only for interactivity
+- `next/image` for all images with width/height/alt
+- `next/font` for custom fonts (Nunito, Inter)
 - Export `metadata` or `generateMetadata()` for SEO on every page
-- React Compiler handles memoization automatically — no manual `useMemo`/`useCallback`
-- Turbopack is default for dev and production builds
+- React Compiler handles memoization — no manual `useMemo`/`useCallback`
+- Turbopack default for dev + production
 
 ## Docs Index
-Before writing any Next.js code, read the relevant doc from the bundled docs:
+Before Next.js code, read relevant bundled doc:
 - `node_modules/next/dist/docs/app/` — App Router guides
 - `node_modules/next/dist/docs/app/api-reference/` — API reference
 - `node_modules/next/dist/docs/app/building-your-application/` — Building apps
@@ -45,15 +45,15 @@ Before writing any Next.js code, read the relevant doc from the bundled docs:
 - `node_modules/next/dist/docs/app/building-your-application/deploying/` — Deploying
 
 ## Agent Skills
-This project uses the following skills in `.opencode/skills/`:
-- `next-best-practices` — Next.js App Router, RSC, async APIs, metadata
-- `react-best-practices` — React 19 compiler-first patterns
-- `nextjs-anti-patterns` — Common AI-generated mistakes
+Skills in `.opencode/skills/`:
+- `next-best-practices` — App Router, RSC, async APIs, metadata
+- `react-best-practices` — React 19 compiler-first
+- `nextjs-anti-patterns` — AI-generated mistakes
 - `code-review-and-quality` — 5-axis review before merge
 - `code-reviewer` — Staff Engineer review persona
 - `github-pr-review` — PR review with inline suggestions
 - `git-workflow-and-versioning` — Atomic commits, branch discipline
 - `performance-optimization` — Core Web Vitals, bundle analysis
-- `security-and-hardening` — OWASP prevention, secrets management
-- `vercel-deploy` — Edge functions, ISR, deployment config
+- `security-and-hardening` — OWASP, secrets management
+- `vercel-deploy` — Edge functions, ISR, deployment
 - `ui-ux-pro-max` — Design systems, colors, typography
