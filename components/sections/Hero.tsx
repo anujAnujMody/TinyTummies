@@ -74,6 +74,8 @@ const bannerItems = [
   { icon: "💚", text: "Balanced Nutrition" },
 ];
 
+const marqueeItems = Array.from({ length: 2 }, () => bannerItems).flat();
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -104,48 +106,15 @@ export default function Hero() {
     >
       {/* Background gradient blob behind mascot */}
       <motion.div
-        className="absolute top-[5%] right-[3%] w-[450px] h-[450px] md:w-[550px] md:h-[550px] lg:w-[650px] lg:h-[650px] rounded-full pointer-events-none"
-        style={{
-          y: blobY,
-          background: "radial-gradient(circle, rgba(251,191,36,0.18) 0%, rgba(244,114,182,0.1) 45%, rgba(56,189,248,0.06) 70%, transparent 100%)",
-          filter: "blur(50px)",
-        }}
+        className="absolute top-[5%] right-[3%] w-[450px] h-[450px] md:w-[550px] md:h-[550px] lg:w-[650px] lg:h-[650px] rounded-full pointer-events-none bg-tt-sunny/10 blur-3xl"
+        style={{ y: blobY }}
       />
 
       {/* Accent blob top-left */}
       <motion.div
-        className="absolute top-[12%] left-[6%] w-[150px] h-[150px] rounded-full pointer-events-none"
-        style={{
-          y: blobY,
-          background: "radial-gradient(circle, rgba(132,204,22,0.1) 0%, transparent 70%)",
-          filter: "blur(30px)",
-        }}
+        className="absolute top-[12%] left-[6%] w-[150px] h-[150px] rounded-full pointer-events-none bg-tt-lime/10 blur-2xl"
+        style={{ y: blobY }}
       />
-
-      {/* Floating decorations */}
-      <motion.div
-        className="absolute top-[18%] left-[10%] w-4 h-4 text-tt-sunny/20 pointer-events-none"
-        animate={{ rotate: 360, y: [0, -5, 0] }}
-        transition={{ rotate: { duration: 18, repeat: Infinity, ease: "linear" }, y: { duration: 3.5, repeat: Infinity, ease: "easeInOut" } }}
-      >
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
-      </motion.div>
-
-      <motion.div
-        className="absolute top-[28%] right-[28%] w-2.5 h-2.5 text-tt-bubblegum/15 pointer-events-none"
-        animate={{ y: [0, -8, 0], scale: [1, 1.15, 1] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" /></svg>
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-[18%] left-[15%] w-3 h-3 text-tt-lime/12 pointer-events-none"
-        animate={{ y: [0, -6, 0], rotate: [0, 180, 360] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
-      </motion.div>
 
       <div className="relative z-10 w-full flex flex-col h-full">
         {/* Navbar spacer */}
@@ -165,7 +134,7 @@ export default function Hero() {
               <h1 className="font-display font-extrabold leading-[1.08] tracking-tight text-tt-green-deep">
                 <span className="block text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[3rem]">Struggling to Make</span>
                 <span className="block text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[3rem]">Your Child Eat</span>
-                <span className="block text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[3rem] bg-gradient-to-r from-tt-orange via-tt-tomato to-tt-bubblegum bg-clip-text text-transparent">Healthy?</span>
+                <span className="block text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[3rem] text-tt-orange">Healthy?</span>
               </h1>
             </motion.div>
 
@@ -275,7 +244,7 @@ export default function Hero() {
               animate={{ x: ["0%", "-50%"] }}
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
             >
-              {[...bannerItems, ...bannerItems].map((item, i) => (
+              {marqueeItems.map((item, i) => (
                 <div key={i} className="flex items-center gap-1.5 shrink-0">
                   <span className="text-base md:text-lg">{item.icon}</span>
                   <span className="font-display font-semibold text-xs md:text-sm text-tt-green-deep/60 whitespace-nowrap">

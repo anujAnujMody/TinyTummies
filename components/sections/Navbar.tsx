@@ -51,7 +51,7 @@ export default function Navbar() {
               {/* Mouth */}
               <path d="M14 21.5 Q16 23 18 21.5" strokeWidth="1.5" />
             </svg>
-            <span className="font-display text-lg font-extrabold bg-gradient-to-r from-tt-green-deep to-tt-green bg-clip-text text-transparent">
+            <span className="font-display text-lg font-extrabold text-tt-green-deep">
               Tiny Tummies
             </span>
           </a>
