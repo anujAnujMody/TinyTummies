@@ -60,21 +60,24 @@ function Button({
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants> & {
   href?: string
 }) {
-  const Comp = href ? "a" : "button"
-  const extraProps = href
-    ? {
-        href,
-        target: href.startsWith("http") ? "_blank" : undefined,
-        rel: href.startsWith("http") ? "noopener noreferrer" : undefined,
-      }
-    : {}
+  if (href) {
+    return (
+      <a
+        data-slot="button"
+        className={cn(buttonVariants({ variant, size, className }))}
+        href={href}
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+        {...(props as React.ComponentProps<"a">)}
+      />
+    )
+  }
 
   return (
-    <Comp
+    <button
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
-      {...extraProps}
-      {...(props as React.ComponentProps<"button"> & React.ComponentProps<"a">)}
+      {...(props as React.ComponentProps<"button">)}
     />
   )
 }
