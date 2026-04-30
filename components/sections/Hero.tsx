@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 const trustPills = [
@@ -16,9 +15,6 @@ const trustPills = [
       </svg>
     ),
     text: "5 Days/Week",
-    bg: "bg-tt-sky/15",
-    border: "border-tt-sky/25",
-    iconC: "text-tt-sky",
   },
   {
     icon: (
@@ -27,9 +23,6 @@ const trustPills = [
       </svg>
     ),
     text: "100% Vegetarian",
-    bg: "bg-tt-lime/15",
-    border: "border-tt-lime/25",
-    iconC: "text-tt-lime",
   },
   {
     icon: (
@@ -43,9 +36,6 @@ const trustPills = [
       </svg>
     ),
     text: "School Delivery",
-    bg: "bg-tt-sunny/15",
-    border: "border-tt-sunny/25",
-    iconC: "text-tt-sunny-dark",
   },
   {
     icon: (
@@ -57,24 +47,8 @@ const trustPills = [
       </svg>
     ),
     text: "Kid-Approved",
-    bg: "bg-tt-bubblegum/15",
-    border: "border-tt-bubblegum/25",
-    iconC: "text-tt-bubblegum",
   },
 ];
-
-const bannerItems = [
-  { icon: "📅", text: "5 Days a Week" },
-  { icon: "🥬", text: "100% Vegetarian" },
-  { icon: "🏫", text: "School Delivery" },
-  { icon: "👨‍🍳", text: "Chef-Prepared Fresh" },
-  { icon: "😊", text: "Kid-Approved" },
-  { icon: "🌿", text: "No Preservatives" },
-  { icon: "📦", text: "Eco Packaging" },
-  { icon: "💚", text: "Balanced Nutrition" },
-];
-
-const marqueeItems = Array.from({ length: 2 }, () => bannerItems).flat();
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -90,113 +64,99 @@ const fadeUp = {
 };
 
 export default function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const mascotY = useTransform(scrollYProgress, [0, 1], [0, 50]);
-  const blobY = useTransform(scrollYProgress, [0, 1], [0, 60]);
-
   return (
     <section
-      ref={sectionRef}
-      className="relative h-[100svh] flex flex-col overflow-hidden bg-tt-warm"
+      id="hero"
+      className="relative h-[100svh] pt-16 md:pt-20 scroll-mt-16 md:scroll-mt-20 flex flex-col bg-tt-warm overflow-hidden"
     >
-      {/* Background gradient blob behind mascot */}
-      <motion.div
-        className="absolute top-[5%] right-[3%] w-[450px] h-[450px] md:w-[550px] md:h-[550px] lg:w-[650px] lg:h-[650px] rounded-full pointer-events-none bg-tt-sunny/10 blur-3xl"
-        style={{ y: blobY }}
-      />
-
-      {/* Accent blob top-left */}
-      <motion.div
-        className="absolute top-[12%] left-[6%] w-[150px] h-[150px] rounded-full pointer-events-none bg-tt-lime/10 blur-2xl"
-        style={{ y: blobY }}
-      />
-
       <div className="relative z-10 w-full flex flex-col h-full">
         {/* Navbar spacer */}
-        <div className="h-14 md:h-16 shrink-0" />
+        <div className="h-12 md:h-16 shrink-0" />
 
-        {/* Main two-column layout */}
-        <div className="flex-1 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16 min-h-0 py-2 md:py-0 px-4 md:px-8 lg:px-16 max-w-[1400px] mx-auto w-full">
-          {/* LEFT: Text content */}
+        {/* Main content - 50/50 split */}
+        <div className="flex-1 flex flex-col md:flex-row relative min-h-0">
+          
+          {/* LEFT: Text - exactly 50% */}
           <motion.div
-            className="flex flex-col items-center md:items-start text-center md:text-left md:w-[52%] lg:w-[50%] shrink-0 md:pl-4 lg:pl-8"
+            className="flex flex-col items-center md:items-start text-center md:text-left w-full md:w-[40%] shrink-0 py-2 md:py-0 px-6 md:px-8 lg:px-12 justify-center"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
+            {/* Logo with gentle float animation */}
+            <motion.div 
+              initial={{ scale: 0.6, opacity: 0 }}
+              animate={{ 
+                scale: 1, 
+                opacity: 1,
+                y: [0, -6, 0]
+              }}
+              transition={{ 
+                scale: { type: "spring", stiffness: 200, damping: 15, delay: 0.1 },
+                opacity: { duration: 0.4, delay: 0.1 },
+                y: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
+              }}
+              className="mb-2 md:mb-3"
+            >
+              <Image
+                src="/images/logo-full.png"
+                alt="Tiny Tummies"
+                width={320}
+                height={160}
+                className="w-40 h-20 md:w-56 md:h-28 lg:w-72 lg:h-36 object-contain"
+                priority
+              />
+            </motion.div>
+
             {/* Headline */}
             <motion.div variants={fadeUp}>
-              <h1 className="font-display font-extrabold leading-[1.08] tracking-tight text-tt-green-deep">
-                <span className="block text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[3rem]">Struggling to Make</span>
-                <span className="block text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[3rem]">Your Child Eat</span>
-                <span className="block text-2xl sm:text-3xl md:text-[2.4rem] lg:text-[3rem] text-tt-orange">Healthy?</span>
+              <h1 className="font-display font-extrabold leading-[1.1] tracking-tight text-tt-text">
+                <span className="block text-3xl sm:text-4xl md:text-[2.4rem] lg:text-[3rem]">Struggling to Make</span>
+                <span className="block text-3xl sm:text-4xl md:text-[2.4rem] lg:text-[3rem]">Your Child Eat</span>
+                <span className="block text-3xl sm:text-4xl md:text-[2.4rem] lg:text-[3rem] text-tt-orange">Healthy?</span>
               </h1>
             </motion.div>
 
             {/* Agitation */}
             <motion.div variants={fadeUp}>
-              <p className="mt-2 md:mt-3 text-tt-text-secondary font-body text-sm md:text-[0.95rem] max-w-lg leading-relaxed">
-                Every morning, the same battle. Wasted food. Guilt. Stress.
-              </p>
-            </motion.div>
-
-            {/* Solution badge */}
-            <motion.div variants={fadeUp}>
-              <div className="mt-2 md:mt-3 inline-flex items-center gap-2 bg-gradient-to-r from-tt-green to-tt-lime text-white font-display font-bold text-xs md:text-sm px-4 py-1.5 rounded-full shadow-md">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-                Tiny Tummies Makes Healthy Fun
-              </div>
-            </motion.div>
-
-            {/* Description */}
-            <motion.div variants={fadeUp}>
-              <p className="mt-2 md:mt-3 text-tt-green-dark/70 font-body text-sm md:text-[0.95rem] max-w-lg leading-relaxed">
-                Fresh, balanced vegetarian meals delivered to school — Monday to Saturday.
+              <p className="mt-2 md:mt-3 text-tt-text-secondary font-body text-sm md:text-base max-w-md leading-relaxed">
+                Every morning, the same battle. Wasted food. Guilt. Stress. We make healthy eating the easiest part of your child&apos;s day.
               </p>
             </motion.div>
 
             {/* CTAs */}
             <motion.div variants={fadeUp}>
-              <div className="mt-3 md:mt-4 flex flex-col sm:flex-row items-center md:items-start gap-2.5">
+              <div className="mt-3 md:mt-4 flex flex-col sm:flex-row items-center md:items-start gap-3">
                 <Button
                   href="https://docs.google.com/forms/d/e/1FAIpQLSegxxacmX0Udhjpdl_7lcsMVtiVaudhonyVKcfnNwJ9j4-tTA/viewform"
-                  variant="gradient-cta"
+                  variant="default"
                   size="lg"
-                  className="text-sm md:text-base px-6 md:px-7 py-2.5"
                 >
                   Get Started — Free Trial
                 </Button>
                 <Button
                   href="https://wa.me/917975465679"
-                  variant="gradient-green"
+                  variant="outline"
                   size="lg"
-                  className="text-sm md:text-base px-6 md:px-7 py-2.5"
                 >
                   Chat on WhatsApp
                 </Button>
               </div>
             </motion.div>
 
-            {/* Trust pills */}
+            {/* Trust pills - single row, compact */}
             <motion.div variants={fadeUp}>
-              <div className="mt-3 md:mt-4 flex flex-wrap items-center justify-center md:justify-start gap-1.5">
+              <div className="mt-3 md:mt-4 flex flex-nowrap items-center justify-center md:justify-start gap-1.5 md:gap-2">
                 {trustPills.map((pill, i) => (
                   <motion.div
                     key={pill.text}
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.6 + i * 0.07, type: "spring", stiffness: 300, damping: 20 }}
-                    className={`flex items-center gap-1 ${pill.bg} ${pill.border} rounded-full px-2.5 py-1 shadow-sm border cursor-default`}
+                    className="flex items-center gap-1 bg-tt-green-tint rounded-lg px-2 py-1 md:px-2.5 md:py-1.5 cursor-default shrink-0"
                   >
-                    <span className={pill.iconC}>{pill.icon}</span>
-                    <span className="font-display font-semibold text-[11px] whitespace-nowrap text-tt-green-deep/70">
+                    <span className="text-tt-green shrink-0">{pill.icon}</span>
+                    <span className="font-display font-semibold text-[10px] md:text-[11px] whitespace-nowrap text-tt-text-secondary">
                       {pill.text}
                     </span>
                   </motion.div>
@@ -205,35 +165,83 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT: Mascot */}
+          {/* RIGHT: Image - exactly 50%, bleeds to edge, seamless merge */}
           <motion.div
-            className="relative flex items-center justify-center shrink-0 md:w-[48%] lg:w-[50%]"
-            style={{ y: mascotY }}
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.25, duration: 0.6 }}
+            className="hidden md:block absolute inset-y-0 left-[40%] right-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
           >
-            <div className="relative">
-              {/* Glow behind mascot */}
-              <div className="absolute inset-[-15%] bg-gradient-to-br from-tt-sunny/20 via-tt-bubblegum/12 to-tt-sky/10 blur-2xl rounded-full" />
-              {/* Mascot image */}
-              <div className="relative animate-float">
-                <Image
-                  src="/images/panda-bento.png"
-                  alt="Tiny Tummies mascot with healthy bento meal"
-                  width={480}
-                  height={480}
-                  className="w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] lg:w-[440px] lg:h-[440px] drop-shadow-2xl"
-                  priority
-                />
-              </div>
-            </div>
+            <Image
+              src="/images/hero-kid-eating.jpg"
+              alt="Happy mother feeding her child a healthy meal"
+              fill
+              className="object-cover object-center"
+              sizes="50vw"
+              priority
+            />
+            
+            {/* Left edge fade - merges image into warm background */}
+            <div 
+              className="absolute inset-y-0 left-0 w-32 lg:w-48"
+              style={{
+                background: "linear-gradient(to right, #F7F5F2 0%, #F7F5F2 30%, rgba(247,245,242,0.8) 60%, transparent 100%)"
+              }}
+            />
+            
+            {/* Bottom fade - merges into next section */}
+            <div 
+              className="absolute inset-x-0 bottom-0 h-24"
+              style={{
+                background: "linear-gradient(to top, #F7F5F2 0%, rgba(247,245,242,0.6) 40%, transparent 100%)"
+              }}
+            />
+
+            {/* Quote overlay */}
+            <motion.div
+              className="absolute bottom-8 left-8 right-8"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+            >
+              <p className="font-display font-bold text-white text-lg text-center" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.6)" }}>
+                &ldquo;Happy kids, relieved parents&rdquo;
+              </p>
+            </motion.div>
+          </motion.div>
+
+          {/* Mobile image */}
+          <motion.div
+            className="md:hidden relative w-full h-56 mt-4 mx-4 rounded-xl overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            <Image
+              src="/images/hero-kid-eating.jpg"
+              alt="Happy mother feeding her child a healthy meal"
+              fill
+              className="object-cover object-center"
+              sizes="100vw"
+              priority
+            />
+            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/40 to-transparent" />
+            <motion.div
+              className="absolute bottom-4 left-4 right-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+            >
+              <p className="font-display font-bold text-white text-sm text-center" style={{ textShadow: "0 1px 4px rgba(0,0,0,0.5)" }}>
+                &ldquo;Happy kids, relieved parents&rdquo;
+              </p>
+            </motion.div>
           </motion.div>
         </div>
 
-        {/* Scrolling trust banner - full width, inside 100vh */}
+        {/* Scrolling trust banner */}
         <motion.div
-          className="shrink-0 w-full py-2.5 md:py-3 bg-gradient-to-r from-tt-green/5 via-tt-sunny/5 to-tt-bubblegum/5 border-t border-tt-green/10"
+          className="shrink-0 w-full py-2 md:py-3 bg-tt-warm"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.5 }}
@@ -244,10 +252,19 @@ export default function Hero() {
               animate={{ x: ["0%", "-50%"] }}
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
             >
-              {marqueeItems.map((item, i) => (
+              {[...Array(2)].flatMap(() => [
+                { icon: "📅", text: "5 Days a Week" },
+                { icon: "🥬", text: "100% Vegetarian" },
+                { icon: "🏫", text: "School Delivery" },
+                { icon: "👨‍🍳", text: "Chef-Prepared Fresh" },
+                { icon: "😊", text: "Kid-Approved" },
+                { icon: "🌿", text: "No Preservatives" },
+                { icon: "📦", text: "Eco Packaging" },
+                { icon: "💚", text: "Balanced Nutrition" },
+              ]).map((item, i) => (
                 <div key={i} className="flex items-center gap-1.5 shrink-0">
                   <span className="text-base md:text-lg">{item.icon}</span>
-                  <span className="font-display font-semibold text-xs md:text-sm text-tt-green-deep/60 whitespace-nowrap">
+                  <span className="font-display font-semibold text-xs md:text-sm text-tt-text-secondary whitespace-nowrap">
                     {item.text}
                   </span>
                 </div>

@@ -4,44 +4,38 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-full border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all duration-200 outline-none select-none focus-visible:ring-2 focus-visible:ring-tt-green/50 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-md [a]:hover:bg-primary/80",
+        default:
+          "bg-tt-green text-white hover:bg-tt-green-dark hover:scale-[1.03] hover:shadow-md",
         outline:
-          "border-primary bg-transparent text-primary hover:bg-primary/10 hover:-translate-y-0.5 aria-expanded:bg-muted aria-expanded:text-foreground",
+          "border-2 border-tt-green bg-transparent text-tt-green hover:bg-tt-green-tint hover:scale-[1.03]",
         secondary:
-          "bg-secondary text-white hover:bg-secondary/90 hover:-translate-y-0.5 hover:shadow-md aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "bg-tt-orange text-white hover:bg-tt-orange-dark hover:scale-[1.03] hover:shadow-md",
         ghost:
-          "border-2 border-primary text-primary hover:bg-primary/10 hover:-translate-y-0.5 aria-expanded:bg-muted aria-expanded:text-foreground",
+          "bg-transparent text-tt-green hover:bg-tt-green-tint hover:scale-[1.03]",
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-red-50 text-red-600 hover:bg-red-100",
+        link: "text-tt-green underline-offset-4 hover:underline",
         whatsapp:
-          "bg-tt-green text-white hover:bg-tt-green-deep hover:-translate-y-0.5 hover:shadow-md",
-        "glow-orange":
-          "bg-secondary text-white hover:bg-secondary/90 hover:-translate-y-0.5 shadow-lg animate-pulse-glow",
-        "glow-green":
-          "bg-primary text-primary-foreground hover:bg-primary/90 hover:-translate-y-0.5 shadow-lg animate-pulse-glow",
+          "bg-tt-green text-white hover:bg-tt-green-dark hover:scale-[1.03] hover:shadow-md",
         "gradient-cta":
-          "bg-gradient-to-r from-tt-orange to-tt-tomato text-white hover:from-tt-orange/90 hover:to-tt-tomato/90 hover:-translate-y-0.5 hover:shadow-xl shadow-lg shadow-tt-orange/25 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:animate-shimmer before:bg-[length:200%_100%]",
+          "bg-gradient-to-r from-tt-orange to-tt-orange-light text-white hover:from-tt-orange-dark hover:to-tt-orange hover:scale-[1.03] hover:shadow-lg shadow-md shadow-tt-orange/20",
         "gradient-green":
-          "bg-gradient-to-r from-tt-green to-tt-lime text-white hover:from-tt-green/90 hover:to-tt-lime/90 hover:-translate-y-0.5 hover:shadow-xl shadow-lg shadow-tt-green/25 relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:animate-shimmer before:bg-[length:200%_100%]",
+          "bg-gradient-to-r from-tt-green to-tt-green-light text-white hover:from-tt-green-dark hover:to-tt-green hover:scale-[1.03] hover:shadow-lg shadow-md shadow-tt-green/20",
       },
       size: {
-        default:
-          "h-8 gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        xs: "h-6 gap-1 rounded-full px-2 text-xs in-data-[slot=button-group]:rounded-full has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "px-4 py-2 text-sm gap-1.5",
-        md: "px-6 py-3 text-sm gap-1.5",
-        lg: "px-8 py-4 text-base gap-1.5",
-        icon: "size-8",
-        "icon-xs":
-          "size-6 rounded-full in-data-[slot=button-group]:rounded-full [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm":
-          "size-7 rounded-full in-data-[slot=button-group]:rounded-full",
-        "icon-lg": "size-9",
+        default: "h-10 gap-2 px-4",
+        xs: "h-7 gap-1.5 rounded-lg px-2.5 text-xs",
+        sm: "h-9 gap-1.5 rounded-lg px-3 text-sm",
+        md: "h-11 gap-2 rounded-xl px-5 text-sm",
+        lg: "h-12 gap-2 rounded-xl px-6 text-base",
+        icon: "size-10 rounded-xl",
+        "icon-xs": "size-7 rounded-lg",
+        "icon-sm": "size-8 rounded-lg",
+        "icon-lg": "size-11 rounded-xl",
       },
     },
     defaultVariants: {
