@@ -54,3 +54,12 @@ get_googlebot.py
 get_img.py
 get_img_puppeteer.js
 screenshot.jpg
+
+# docs (design refs, mockups, temp files - not needed in repo)
+docs/
+
+# Scripts (extraction utilities, ML model checkpoints)
+scripts/
+
+# Debug artifacts
+debug_mock_regions.png

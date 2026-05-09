@@ -1,35 +1,19 @@
 import type { Metadata } from "next";
-import { Nunito, Inter, Geist, Baloo_2 } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const baloo = Baloo_2({
-  variable: "--font-baloo",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
-const nunito = Nunito({
-  variable: "--font-nunito",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Tiny Tummies — Little Tummies, Big Nutrition | Coming Soon",
+  title: "Tiny Tummies — Little Tummies, Big Nutrition",
   description:
-    "Fresh, balanced meals designed for young children — delivered directly to their school, every day. Coming soon.",
+    "Fresh, balanced meals designed for young children — delivered directly to their school or doorstep every day.",
   keywords: [
     "kids meals",
     "school lunch India",
@@ -46,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Tiny Tummies — Little Tummies, Big Nutrition",
     description:
-      "Fresh, balanced meals designed for young children — delivered directly to their school, every day. Coming soon.",
+      "Fresh, balanced meals designed for young children — delivered directly to their school or doorstep every day.",
     type: "website",
     locale: "en_IN",
   },
@@ -60,9 +44,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", baloo.variable, nunito.variable, inter.variable, "font-sans", geist.variable)}
+      className={cn(
+        "h-full antialiased",
+        poppins.variable,
+      )}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col overflow-x-hidden">
+        {children}
+      </body>
     </html>
   );
 }

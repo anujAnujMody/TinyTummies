@@ -5,71 +5,61 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Primary Green */
-  --color-tt-green: #2E7D32;
-  --color-tt-green-light: #4CAF50;
-  --color-tt-green-bright: #66BB6A;
-  --color-tt-green-dark: #1B5E20;
-  --color-tt-green-tint: #E8F5E9;
-  /* Secondary Orange */
-  --color-tt-orange: #FF8C42;
-  --color-tt-orange-light: #FFA726;
-  --color-tt-orange-bright: #FF7043;
-  --color-tt-orange-dark: #E65100;
-  --color-tt-orange-tint: #FFF3E0;
-  /* Supporting colors */
-  --color-tt-pink: #FF6B9D;
-  --color-tt-pink-light: #FF80C0;
-  --color-tt-pink-dark: #E64980;
-  --color-tt-pink-tint: #FFD6EC;
-  --color-tt-blue: #1C7ED6;
-  --color-tt-blue-light: #4DABF7;
-  --color-tt-blue-dark: #1864AB;
-  --color-tt-blue-tint: #D8EEFF;
-  --color-tt-yellow: #FFD60A;
-  --color-tt-yellow-light: #FDD835;
-  --color-tt-yellow-dark: #F59F00;
-  /* Background & Surface */
-  --color-tt-cream: #FFF4CC;
-  --color-tt-cream-light: #FFFAE0;
-  --color-tt-dark: #1F2937;
-  --color-tt-gray: #F5F5F5;
-  --color-tt-white: #FFFFFF;
-  --color-tt-warm: #F7F5F2;
+  /* Claymorph section tones */
+  --color-clay-cream: #F4F9ED;
+  --color-clay-mint: #E8F5E9;
+  --color-clay-butter: #FFF8E0;
+  --color-clay-blush: #FFE4EC;
+  --color-clay-sky: #E3F2FD;
+  --color-clay-coral: #FFE0CC;
+
+  /* Claymorph brand inks */
+  --color-clay-green-700: #2E7D32;
+  --color-clay-green-900: #1B5E20;
+  --color-clay-orange-500: #FF8C42;
+  --color-clay-orange-700: #E65100;
+  --color-clay-pink-500: #FF6B9D;
+  --color-clay-yellow-400: #FFD60A;
+
+  /* Claymorph border offsets (darker shade of each tone) */
+  --color-clay-mint-border: #B9DFA0;
+  --color-clay-butter-border: #E8D5A0;
+  --color-clay-blush-border: #E8A0B8;
+  --color-clay-sky-border: #A0C8E8;
+  --color-clay-coral-border: #E8B090;
+  --color-clay-cream-border: #D8C8A0;
+
   /* Text */
-  --color-tt-text: #1F2937;
-  --color-tt-text-secondary: #6B7280;
-  /* Legacy aliases for compatibility */
-  --color-tt-green-deep: #2E7D32;
-  --color-tt-sky: #38BDF8;
-  --color-tt-sunny: #FBBF24;
-  --color-tt-bubblegum: #F472B6;
-  --color-tt-lime: #84CC16;
-  --color-tt-tomato: #EF4444;
+  --color-ink: #1B1B1B;
+  --color-ink-muted: #475569;
 
-  --font-display: var(--font-baloo), var(--font-nunito), "Quicksand", sans-serif;
-  --font-body: var(--font-inter), "Open Sans", sans-serif;
+  /* Fonts */
+  --font-display: var(--font-poppins), sans-serif;
+  --font-body: var(--font-poppins), sans-serif;
 
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 32px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 2px 8px rgba(31, 41, 55, 0.05);
-  --shadow-md: 0 8px 24px rgba(31, 41, 55, 0.08);
-  --shadow-lg: 0 16px 48px rgba(31, 41, 55, 0.12);
-  --shadow-glow-green: 0 0 20px rgba(46, 125, 50, 0.3);
-  --shadow-glow-orange: 0 0 20px rgba(255, 140, 66, 0.3);
+  /* Shadows — claymorph double-shadow */
+  --shadow-clay: 0 4px 0 0 var(--color-clay-mint-border), 0 12px 24px oklch(0 0 0 / 0.1);
+  --shadow-clay-pressed: 0 2px 0 0 var(--color-clay-mint-border), 0 6px 12px oklch(0 0 0 / 0.08);
+  --shadow-clay-orange: 0 4px 0 0 var(--color-clay-orange-700), 0 12px 24px oklch(0 0 0 / 0.1);
+  --shadow-clay-orange-pressed: 0 2px 0 0 var(--color-clay-orange-700), 0 6px 12px oklch(0 0 0 / 0.08);
+  --shadow-clay-green: 0 4px 0 0 var(--color-clay-green-900), 0 12px 24px oklch(0 0 0 / 0.1);
+  --shadow-clay-green-pressed: 0 2px 0 0 var(--color-clay-green-900), 0 6px 12px oklch(0 0 0 / 0.08);
 
-  --animate-blob: blob 7s infinite;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-float-slow: float 8s ease-in-out infinite;
-  --animate-float-slower: float 10s ease-in-out infinite;
+  /* Animations */
+  --animate-marquee: marquee 30s linear infinite;
   --animate-bounce-gentle: bounce-gentle 2s ease-in-out infinite;
   --animate-wiggle: wiggle 2s ease-in-out infinite;
-  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
-  --animate-shimmer: shimmer 2s linear infinite;
   --animate-pop: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  --animate-float: float 6s ease-in-out infinite;
+
+  /* Shadcn compatibility */
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -101,13 +91,9 @@
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* Lenis smooth scroll recommended CSS */
+/* Lenis smooth scroll */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -130,19 +116,24 @@ html.lenis body {
 }
 
 body {
-  background: var(--color-tt-warm);
-  color: var(--color-tt-text);
+  background: var(--color-clay-cream);
+  color: var(--color-ink);
   font-family: var(--font-body);
   overflow-x: hidden;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-main > section {
-  min-height: 60vh;
+img {
+  max-width: 100%;
+}
+
+@supports (height: 100svh) {
+  .min-h-screen-safe {
+    min-height: 100svh;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -160,11 +151,10 @@ main > section {
 }
 
 ::selection {
-  background: var(--color-tt-green);
+  background: var(--color-clay-green-700);
   color: white;
 }
 
-/* Hide scrollbar utility */
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -173,16 +163,9 @@ main > section {
   display: none;
 }
 
-@keyframes blob {
-  0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-  100% { transform: translate(0px, 0px) scale(1); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 @keyframes bounce-gentle {
@@ -196,25 +179,109 @@ main > section {
   75% { transform: rotate(3deg); }
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 140, 66, 0.4); }
-  50% { box-shadow: 0 0 20px 8px rgba(255, 140, 66, 0.15); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
 @keyframes pop {
   0% { transform: scale(0); opacity: 0; }
   60% { transform: scale(1.15); opacity: 1; }
   100% { transform: scale(1); opacity: 1; }
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* ── Scroll-triggered animations (triggered by .is-visible class) ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Blob morph animation for hero */
+@keyframes blobOuter {
+  0% { border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; }
+  25% { border-radius: 55% 45% 50% 50% / 50% 55% 45% 55%; }
+  50% { border-radius: 45% 55% 60% 40% / 60% 40% 55% 45%; }
+  75% { border-radius: 50% 50% 45% 55% / 45% 55% 50% 50%; }
+  100% { border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; }
+}
+@keyframes blobInner {
+  0% { border-radius: 45% 55% 50% 50% / 50% 50% 55% 45%; }
+  25% { border-radius: 50% 50% 45% 55% / 55% 45% 50% 50%; }
+  50% { border-radius: 55% 45% 55% 45% / 50% 50% 45% 55%; }
+  75% { border-radius: 45% 55% 50% 50% / 45% 55% 50% 50%; }
+  100% { border-radius: 45% 55% 50% 50% / 50% 50% 55% 45%; }
+}
+
+/* Panda float animation */
+@keyframes pandaFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+}
+@keyframes pandaFloatAlt {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(-3deg); }
+}
+
+/* ── Animation base states (hidden until .is-visible is added) ── */
+.animate-on-scroll {
+  opacity: 0;
+  transition: none; /* Let animation handle it */
+}
+.animate-on-scroll.is-visible {
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Stagger animation classes */
+.fade-up { animation-name: fadeInUp; animation-duration: 0.6s; animation-fill-mode: forwards; }
+.fade-left { animation-name: fadeInLeft; animation-duration: 0.6s; animation-fill-mode: forwards; }
+.fade-right { animation-name: fadeInRight; animation-duration: 0.6s; animation-fill-mode: forwards; }
+.fade-scale { animation-name: fadeInScale; animation-duration: 0.6s; animation-fill-mode: forwards; }
+.fade-in { animation-name: fadeIn; animation-duration: 0.5s; animation-fill-mode: forwards; }
+
+/* Blob animations */
+.blob-outer { animation-name: blobOuter; animation-duration: 10s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+.blob-inner { animation-name: blobInner; animation-duration: 12s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+
+/* Panda float - applied directly, always animating */
+.panda-float { animation: pandaFloat 5s ease-in-out infinite; }
+.panda-float-alt { animation: pandaFloatAlt 5s ease-in-out infinite; }
+
+/* WhatsApp button animations */
+@keyframes whatsappPulse {
+  0%, 100% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); }
+  50% { box-shadow: 0 4px 24px rgba(37, 211, 102, 0.5); }
+}
+@keyframes whatsappEntrance {
+  from { opacity: 0; transform: scale(0) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.whatsapp-float {
+  animation-name: whatsappPulse, whatsappEntrance;
+  animation-duration: 2s, 0.5s;
+  animation-timing-function: ease-in-out, cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: forwards, forwards;
+}
+
 :root {
-  --background: #F7F5F2;
-  --foreground: #1F2937;
+  --background: #FFF8E7;
+  --foreground: #1B1B1B;
   --card: #FFFFFF;
   --card-foreground: #1F2937;
   --popover: #FFFFFF;
@@ -245,40 +312,6 @@ main > section {
   --sidebar-accent-foreground: #1F2937;
   --sidebar-border: #E5E7EB;
   --sidebar-ring: #2E7D32;
-}
-
-.dark {
-  --background: #1F2937;
-  --foreground: #F7F5F2;
-  --card: #374151;
-  --card-foreground: #F7F5F2;
-  --popover: #374151;
-  --popover-foreground: #F7F5F2;
-  --primary: #4CAF50;
-  --primary-foreground: #1F2937;
-  --secondary: #FF8C42;
-  --secondary-foreground: #1F2937;
-  --muted: #374151;
-  --muted-foreground: #9CA3AF;
-  --accent: #2E7D32;
-  --accent-foreground: #F7F5F2;
-  --destructive: #EF4444;
-  --border: rgba(255, 255, 255, 0.1);
-  --input: rgba(255, 255, 255, 0.15);
-  --ring: #4CAF50;
-  --chart-1: #4CAF50;
-  --chart-2: #FF8C42;
-  --chart-3: #4DABF7;
-  --chart-4: #FFD60A;
-  --chart-5: #FF6B9D;
-  --sidebar: #374151;
-  --sidebar-foreground: #F7F5F2;
-  --sidebar-primary: #4CAF50;
-  --sidebar-primary-foreground: #1F2937;
-  --sidebar-accent: #2E7D32;
-  --sidebar-accent-foreground: #F7F5F2;
-  --sidebar-border: rgba(255, 255, 255, 0.1);
-  --sidebar-ring: #4CAF50;
 }
 
 @layer base {
