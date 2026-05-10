@@ -39,3 +39,27 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# opencode / ai tools
+.opencode/
+*.original.md
+
+# scraper / dev tools
+envato.html
+envato_img.jpg
+extract_envato.py
+freepik.html
+get_envato.py
+get_googlebot.py
+get_img.py
+get_img_puppeteer.js
+screenshot.jpg
+
+# docs (design refs, mockups, temp files - not needed in repo)
+docs/
+
+# Scripts (extraction utilities, ML model checkpoints)
+scripts/
+
+# Debug artifacts
+debug_mock_regions.png

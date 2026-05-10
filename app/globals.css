@@ -1,26 +1,327 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
+  /* Claymorph section tones */
+  --color-clay-cream: #F4F9ED;
+  --color-clay-mint: #E8F5E9;
+  --color-clay-butter: #FFF8E0;
+  --color-clay-blush: #FFE4EC;
+  --color-clay-sky: #E3F2FD;
+  --color-clay-coral: #FFE0CC;
+
+  /* Claymorph brand inks */
+  --color-clay-green-700: #2E7D32;
+  --color-clay-green-900: #1B5E20;
+  --color-clay-orange-500: #FF8C42;
+  --color-clay-orange-700: #E65100;
+  --color-clay-pink-500: #FF6B9D;
+  --color-clay-yellow-400: #FFD60A;
+
+  /* Claymorph border offsets (darker shade of each tone) */
+  --color-clay-mint-border: #B9DFA0;
+  --color-clay-butter-border: #E8D5A0;
+  --color-clay-blush-border: #E8A0B8;
+  --color-clay-sky-border: #A0C8E8;
+  --color-clay-coral-border: #E8B090;
+  --color-clay-cream-border: #D8C8A0;
+
+  /* Text */
+  --color-ink: #1B1B1B;
+  --color-ink-muted: #475569;
+
+  /* Fonts */
+  --font-display: var(--font-poppins), sans-serif;
+  --font-body: var(--font-poppins), sans-serif;
+
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* Shadows — claymorph double-shadow */
+  --shadow-clay: 0 4px 0 0 var(--color-clay-mint-border), 0 12px 24px oklch(0 0 0 / 0.1);
+  --shadow-clay-pressed: 0 2px 0 0 var(--color-clay-mint-border), 0 6px 12px oklch(0 0 0 / 0.08);
+  --shadow-clay-orange: 0 4px 0 0 var(--color-clay-orange-700), 0 12px 24px oklch(0 0 0 / 0.1);
+  --shadow-clay-orange-pressed: 0 2px 0 0 var(--color-clay-orange-700), 0 6px 12px oklch(0 0 0 / 0.08);
+  --shadow-clay-green: 0 4px 0 0 var(--color-clay-green-900), 0 12px 24px oklch(0 0 0 / 0.1);
+  --shadow-clay-green-pressed: 0 2px 0 0 var(--color-clay-green-900), 0 6px 12px oklch(0 0 0 / 0.08);
+
+  /* Animations */
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-bounce-gentle: bounce-gentle 2s ease-in-out infinite;
+  --animate-wiggle: wiggle 2s ease-in-out infinite;
+  --animate-pop: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  --animate-float: float 6s ease-in-out infinite;
+
+  /* Shadcn compatibility */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-clay-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+}
+
+@supports (height: 100svh) {
+  .min-h-screen-safe {
+    min-height: 100svh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::selection {
+  background: var(--color-clay-green-700);
+  color: white;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+@keyframes pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* ── Scroll-triggered animations (triggered by .is-visible class) ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Blob morph animation for hero */
+@keyframes blobOuter {
+  0% { border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; }
+  25% { border-radius: 55% 45% 50% 50% / 50% 55% 45% 55%; }
+  50% { border-radius: 45% 55% 60% 40% / 60% 40% 55% 45%; }
+  75% { border-radius: 50% 50% 45% 55% / 45% 55% 50% 50%; }
+  100% { border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; }
+}
+@keyframes blobInner {
+  0% { border-radius: 45% 55% 50% 50% / 50% 50% 55% 45%; }
+  25% { border-radius: 50% 50% 45% 55% / 55% 45% 50% 50%; }
+  50% { border-radius: 55% 45% 55% 45% / 50% 50% 45% 55%; }
+  75% { border-radius: 45% 55% 50% 50% / 45% 55% 50% 50%; }
+  100% { border-radius: 45% 55% 50% 50% / 50% 50% 55% 45%; }
+}
+
+/* Panda float animation */
+@keyframes pandaFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+}
+@keyframes pandaFloatAlt {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(-3deg); }
+}
+
+/* ── Animation base states (hidden until .is-visible is added) ── */
+.animate-on-scroll {
+  opacity: 0;
+  transition: none; /* Let animation handle it */
+}
+.animate-on-scroll.is-visible {
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Stagger animation classes */
+.fade-up { animation-name: fadeInUp; animation-duration: 0.6s; animation-fill-mode: forwards; }
+.fade-left { animation-name: fadeInLeft; animation-duration: 0.6s; animation-fill-mode: forwards; }
+.fade-right { animation-name: fadeInRight; animation-duration: 0.6s; animation-fill-mode: forwards; }
+.fade-scale { animation-name: fadeInScale; animation-duration: 0.6s; animation-fill-mode: forwards; }
+.fade-in { animation-name: fadeIn; animation-duration: 0.5s; animation-fill-mode: forwards; }
+
+/* Blob animations */
+.blob-outer { animation-name: blobOuter; animation-duration: 10s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+.blob-inner { animation-name: blobInner; animation-duration: 12s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+
+/* Panda float - applied directly, always animating */
+.panda-float { animation: pandaFloat 5s ease-in-out infinite; }
+.panda-float-alt { animation: pandaFloatAlt 5s ease-in-out infinite; }
+
+/* WhatsApp button animations */
+@keyframes whatsappPulse {
+  0%, 100% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); }
+  50% { box-shadow: 0 4px 24px rgba(37, 211, 102, 0.5); }
+}
+@keyframes whatsappEntrance {
+  from { opacity: 0; transform: scale(0) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.whatsapp-float {
+  animation-name: whatsappPulse, whatsappEntrance;
+  animation-duration: 2s, 0.5s;
+  animation-timing-function: ease-in-out, cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: forwards, forwards;
+}
+
+:root {
+  --background: #FFF8E7;
+  --foreground: #1B1B1B;
+  --card: #FFFFFF;
+  --card-foreground: #1F2937;
+  --popover: #FFFFFF;
+  --popover-foreground: #1F2937;
+  --primary: #2E7D32;
+  --primary-foreground: #FFFFFF;
+  --secondary: #FF8C42;
+  --secondary-foreground: #FFFFFF;
+  --muted: #F7F5F2;
+  --muted-foreground: #6B7280;
+  --accent: #E8F5E9;
+  --accent-foreground: #1F2937;
+  --destructive: #EF4444;
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #2E7D32;
+  --chart-1: #2E7D32;
+  --chart-2: #FF8C42;
+  --chart-3: #1C7ED6;
+  --chart-4: #FFD60A;
+  --chart-5: #FF6B9D;
+  --radius: 0.75rem;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #1F2937;
+  --sidebar-primary: #2E7D32;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #E8F5E9;
+  --sidebar-accent-foreground: #1F2937;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #2E7D32;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
 }
