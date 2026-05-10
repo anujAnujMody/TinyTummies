@@ -1,0 +1,103 @@
+import { Leaf, ChefHat, Shield, Truck, Smile } from "lucide-react";
+import type { Plan, FeatureItem } from "./types";
+
+export const plans: Plan[] = [
+  {
+    id: "starter",
+    name: "Starter Munch Plan",
+    tagline: "Perfect for getting started!",
+    price: "₹599",
+    period: "/ week",
+    perMeal: "₹120 per meal",
+    color: "green",
+    icon: "sprout",
+    features: [
+      "5 Nutritious Meals Weekly",
+      "Balanced Nutrition",
+      "Hygienic & Safe",
+      "On-time Delivery",
+      "Flexible Scheduling",
+    ],
+  },
+  {
+    id: "growth",
+    name: "Growth Munch Plan",
+    tagline: "Great balance of nutrition & variety!",
+    price: "₹1,499",
+    period: "/ month",
+    perMeal: "₹68 per meal",
+    color: "orange",
+    icon: "star",
+    popular: true,
+    features: [
+      "20-22 Days Monthly",
+      "Daily Curated Meals",
+      "High Quality Ingredients",
+      "Hygienic & Safe",
+      "Priority Delivery",
+      "Free Friday Treats",
+    ],
+  },
+  {
+    id: "super",
+    name: "Super Munch Plan",
+    tagline: "The best of everything!",
+    price: "₹2,499",
+    period: "/ month",
+    perMeal: "₹113 per meal",
+    color: "purple",
+    icon: "crown",
+    features: [
+      "20-22 Days Premium Meals",
+      "Premium Ingredients",
+      "Wide Variety + Special Treats",
+      "Hygienic & Safe",
+      "Priority Delivery",
+      "Meal Customization",
+      "Dedicated Support",
+    ],
+  },
+];
+
+export const whyChooseFeatures: FeatureItem[] = [
+  {
+    icon: ChefHat,
+    title: "Nutritionist Planned Meals",
+    text: "Designed for growing children.",
+    color: "text-clay-green-700",
+    border: "border-clay-green-700/20",
+    bg: "bg-clay-mint",
+  },
+  {
+    icon: Leaf,
+    title: "No Junk, Ever",
+    text: "No preservatives, no artificial colors.",
+    color: "text-clay-green-700",
+    border: "border-clay-green-700/20",
+    bg: "bg-clay-mint",
+  },
+  {
+    icon: Smile,
+    title: "Kids Love the Taste",
+    text: "Yummy meals they enjoy!",
+    color: "text-clay-green-700",
+    border: "border-clay-green-700/20",
+    bg: "bg-clay-mint",
+  },
+  {
+    icon: Shield,
+    title: "Hygienic & 100% Safe",
+    text: "Cooked in clean kitchens and packed with care.",
+    color: "text-clay-green-700",
+    border: "border-clay-green-700/20",
+    bg: "bg-clay-mint",
+  },
+  {
+    icon: Truck,
+    title: "On-time Delivery Everyday",
+    text: "Delivered to your child's school.",
+    color: "text-clay-green-700",
+    border: "border-clay-green-700/20",
+    bg: "bg-clay-mint",
+  },
+];

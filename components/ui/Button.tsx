@@ -1,5 +1,6 @@
-import { Button as ButtonPrimitive } from "@base-ui/react/button"
-import { cva, type VariantProps } from "class-variance-authority"
+import type { Button as ButtonPrimitive } from "@base-ui/react/button"
+import { cva } from "class-variance-authority"
+import type { VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
@@ -22,9 +23,9 @@ const buttonVariants = cva(
         whatsapp:
           "bg-tt-green text-white hover:bg-tt-green-dark hover:scale-[1.03] hover:shadow-md",
         "gradient-cta":
-          "bg-gradient-to-r from-tt-orange to-tt-orange-light text-white hover:from-tt-orange-dark hover:to-tt-orange hover:scale-[1.03] hover:shadow-lg shadow-md shadow-tt-orange/20",
+          "bg-linear-to-r from-tt-orange to-tt-orange-light text-white hover:from-tt-orange-dark hover:to-tt-orange hover:scale-[1.03] hover:shadow-lg shadow-md shadow-tt-orange/20",
         "gradient-green":
-          "bg-gradient-to-r from-tt-green to-tt-green-light text-white hover:from-tt-green-dark hover:to-tt-green hover:scale-[1.03] hover:shadow-lg shadow-md shadow-tt-green/20",
+          "bg-linear-to-r from-tt-green to-tt-green-light text-white hover:from-tt-green-dark hover:to-tt-green hover:scale-[1.03] hover:shadow-lg shadow-md shadow-tt-green/20",
       },
       size: {
         default: "h-10 gap-2 px-4",

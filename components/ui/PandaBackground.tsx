@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 
 interface PandaBackgroundProps {
   children: React.ReactNode;
@@ -16,7 +15,6 @@ const pandaImages = [
   "/images/pandas/panda-bottle.png",
 ];
 
-/* ── seeded PRNG (mulberry32) ── */
 function seededRandom(seed: number) {
   return function () {
     let t = (seed += 0x6d2b79f5);
@@ -26,7 +24,6 @@ function seededRandom(seed: number) {
   };
 }
 
-/* ── deterministic panda generator with spacing guard ── */
 function generatePandas(count: number) {
   const rand = seededRandom(42);
   const placed: { top: number; left: number; size: number }[] = [];
@@ -64,14 +61,15 @@ function generatePandas(count: number) {
   }));
 }
 
+const pandas = generatePandas(7);
+
 export default function PandaBackground({ children, className, style, count = 7 }: PandaBackgroundProps) {
-  const [pandas] = useState(() => generatePandas(count));
+  const displayPandas = count === 7 ? pandas : generatePandas(count);
 
   return (
     <div className={`relative flex flex-col ${className ?? ""}`} style={style}>
-      {/* ── floating pandas ── */}
       <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
-        {pandas.map((p, i) => (
+        {displayPandas.map((p, i) => (
           <div
             key={i}
             className={`absolute ${p.isAlt ? "panda-float-alt" : "panda-float"}`}
@@ -84,18 +82,11 @@ export default function PandaBackground({ children, className, style, count = 7 
               animationDuration: `${p.duration}s`,
             }}
           >
-            <Image
-              src={p.image}
-              alt=""
-              fill
-              className="object-contain"
-              style={{ opacity: p.opacity }}
-            />
+            <Image src={p.image} alt="" fill className="object-contain" style={{ opacity: p.opacity }} />
           </div>
         ))}
       </div>
 
-      {/* ── content ── */}
       <div className="relative z-10 flex flex-col flex-1">
         {children}
       </div>

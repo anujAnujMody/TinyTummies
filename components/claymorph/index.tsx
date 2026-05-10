@@ -65,8 +65,8 @@ export function ClaySection({
         className,
       )}
     >
-      {/* pt-[76px] = navbar height. pb-6 = bottom breathing room. flex-1 fills remaining height. */}
-      <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8 pt-[76px] pb-6 flex flex-col flex-1">
+      {/* pt-19 = navbar height. pb-6 = bottom breathing room. flex-1 fills remaining height. */}
+      <div className="mx-auto w-full max-w-300 px-5 sm:px-8 pt-19 pb-6 flex flex-col flex-1">
         {children}
       </div>
     </section>
@@ -93,7 +93,7 @@ export function ClayCard({
   style?: React.CSSProperties;
 }) {
   const offset = toneShadowOffset[tone];
-  const radiusMap = { sm: "rounded-[20px]", md: "rounded-[28px]", lg: "rounded-[32px]" };
+  const radiusMap = { sm: "rounded-[20px]", md: "rounded-[28px]", lg: "rounded-4xl" };
   const padMap = { sm: "p-4", md: "p-6", lg: "p-8" };
 
   return (
@@ -106,7 +106,7 @@ export function ClayCard({
         radiusMap[size],
         padMap[size],
         interactive &&
-          "cursor-pointer transition-all duration-180 hover:translate-y-[2px] active:translate-y-[2px]",
+          "cursor-pointer transition-all duration-150 hover:translate-y-0.5 active:translate-y-0.5",
         className,
       )}
       style={{
@@ -139,14 +139,14 @@ export function ClayButton({
 }) {
   const sizeClasses =
     size === "lg"
-      ? "h-14 px-8 text-lg rounded-[22px]"
+      ? "h-14 px-8 text-lg rounded-3xl"
       : "h-12 px-6 text-base rounded-full";
 
   const variantClasses = {
     primary:
-      "bg-clay-orange-500 text-white border-[3px] border-clay-orange-700 hover:translate-y-[2px] active:translate-y-[2px] focus-visible:ring-2 focus-visible:ring-clay-green-700 focus-visible:ring-offset-2",
+      "bg-clay-orange-500 text-white border-[3px] border-clay-orange-700 hover:translate-y-0.5 active:translate-y-0.5 focus-visible:ring-2 focus-visible:ring-clay-green-700 focus-visible:ring-offset-2",
     secondary:
-      "bg-white text-clay-green-700 border-[3px] border-clay-green-700 hover:translate-y-[2px] active:translate-y-[2px] focus-visible:ring-2 focus-visible:ring-clay-green-700 focus-visible:ring-offset-2",
+      "bg-white text-clay-green-700 border-[3px] border-clay-green-700 hover:translate-y-0.5 active:translate-y-0.5 focus-visible:ring-2 focus-visible:ring-clay-green-700 focus-visible:ring-offset-2",
     ghost:
       "text-clay-green-700 border-[3px] border-transparent hover:border-clay-green-700 focus-visible:ring-2 focus-visible:ring-clay-green-700 focus-visible:ring-offset-2",
   };
@@ -158,7 +158,7 @@ export function ClayButton({
   };
 
   const shared = cn(
-    "inline-flex items-center justify-center gap-2 font-display font-bold transition-all duration-180",
+    "inline-flex items-center justify-center gap-2 font-display font-bold transition-all duration-150",
     sizeClasses,
     variantClasses[variant],
     className,
@@ -285,14 +285,11 @@ export function SectionHeader({
 type Pose = "peek" | "wave" | "point" | "pop";
 
 export function PandaCompanion({
-  pose = "pop",
   className,
 }: {
   pose?: Pose;
   className?: string;
 }) {
-  const animationClass = pose === "wave" ? "panda-float-alt" : "panda-float";
-
   return (
     <div className={cn("relative panda-float", className)}>
       <Image

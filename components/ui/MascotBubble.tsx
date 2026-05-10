@@ -23,7 +23,7 @@ export default function MascotBubble({
     <div className={`relative flex flex-col items-center ${className ?? ""}`}>
       {/* speech bubble — sits above mascot */}
       <div
-        className="relative mb-3 rounded-[20px] border-[3px] border-clay-cream-border bg-white px-5 py-4 shadow-[0_4px_0_0_#D8C8A0,0_8px_16px_oklch(0_0_0/0.06)] max-w-[220px]"
+        className="relative mb-3 rounded-[20px] border-[3px] border-clay-cream-border bg-white px-5 py-4 shadow-[0_4px_0_0_#D8C8A0,0_8px_16px_oklch(0_0_0/0.06)] max-w-55"
       >
         {lines.map((line, i) => (
           <p
@@ -36,8 +36,8 @@ export default function MascotBubble({
           </p>
         ))}
         {/* little triangle pointer */}
-        <div className="absolute -bottom-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[10px] border-t-clay-cream-border" />
-        <div className="absolute -bottom-[6px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-white" />
+        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-10 border-t-clay-cream-border" />
+        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-8 border-t-white" />
       </div>
 
       {/* mascot */}

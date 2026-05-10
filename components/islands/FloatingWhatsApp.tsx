@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { WHATSAPP_URL } from "@/data/shared-maps";
 
 export default function FloatingWhatsApp() {
   const [visible, setVisible] = useState(false);
@@ -20,25 +21,23 @@ export default function FloatingWhatsApp() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
-      {/* Tooltip */}
       {showTooltip && (
-        <div className="bg-white rounded-xl shadow-lg px-4 py-2.5 mb-1 border border-tt-green/10 animate-on-scroll fade-in">
-          <p className="font-display font-bold text-tt-green-deep text-sm">
+        <div className="bg-white rounded-xl shadow-lg px-4 py-2.5 mb-1 border border-clay-mint-border animate-on-scroll fade-in">
+          <p className="font-display font-bold text-clay-green-700 text-sm">
             Chat with us on WhatsApp
           </p>
-          <p className="text-xs text-tt-text-secondary">
+          <p className="text-xs text-ink-muted">
             We reply in minutes
           </p>
-          <div className="absolute bottom-[-6px] right-6 w-3 h-3 bg-white border-b border-r border-tt-green/10 rotate-45" />
+          <div className="absolute bottom-[-6px] right-6 w-3 h-3 bg-white border-b border-r border-clay-mint-border rotate-45" />
         </div>
       )}
 
-      {/* Button */}
       <a
-        href="https://wa.me/917975465679?text=Hi%20I%20want%20to%20know%20more%20about%20Tiny%20Tummies"
+        href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] shadow-lg hover:shadow-xl hover:scale-110 active:scale-95 transition-all cursor-pointer whatsapp-float"
+        className="relative flex items-center justify-center w-14 h-14 rounded-full bg-linear-to-br from-[#25D366] to-[#128C7E] shadow-lg hover:shadow-xl hover:scale-110 active:scale-95 transition-all cursor-pointer"
         style={{
           animation: "whatsappPulse 2s ease-in-out infinite, whatsappEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         }}

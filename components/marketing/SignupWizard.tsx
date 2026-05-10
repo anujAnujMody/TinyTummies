@@ -31,8 +31,8 @@ export default function SignupWizard() {
 
   return (
     <div className="px-4 py-8 sm:px-6 lg:px-10">
-      <div className="mx-auto max-w-[1100px]">
-        <Link href="/" className="inline-flex items-center gap-2 rounded-full border-[3px] border-clay-mint-border bg-white px-5 py-2.5 font-display text-sm font-bold text-clay-green-700 transition-all duration-180 hover:translate-y-[2px]" style={{ boxShadow: "0 3px 0 0 #B9DFA0, 0 6px 12px oklch(0 0 0 / 0.06)" }}>
+      <div className="mx-auto max-w-275">
+        <Link href="/" className="inline-flex items-center gap-2 rounded-full border-[3px] border-clay-mint-border bg-white px-5 py-2.5 font-display text-sm font-bold text-clay-green-700 transition-all duration-150 hover:translate-y-0.5" style={{ boxShadow: "0 3px 0 0 #B9DFA0, 0 6px 12px oklch(0 0 0 / 0.06)" }}>
           <ArrowLeft className="size-4" /> Back to Home
         </Link>
 
@@ -164,7 +164,7 @@ function DetailsStep() {
   );
 }
 
-function PlanStep({ selected, onSelect }: { selected: string; onSelect: (id: string) => void }) {
+function PlanStep({ selected, onSelect }: { selected: string; onSelect: (_id: string) => void }) {
   return (
     <div>
       <Type variant="display-lg" className="text-clay-green-900!">
@@ -203,7 +203,7 @@ function PlanStep({ selected, onSelect }: { selected: string; onSelect: (id: str
               <ul className="mt-5 space-y-2 text-left">
                 {plan.features.map((f) => (
                   <li key={f} className="flex gap-2 text-sm text-ink">
-                    <span className={cn("mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full text-white", colors.bg, "border-[2px]", colors.border)}>
+                    <span className={cn("mt-0.5 flex size-4 shrink-0 items-center justify-center rounded-full text-white", colors.bg, "border-2", colors.border)}>
                       <Check className="size-2.5" />
                     </span>
                     {f}

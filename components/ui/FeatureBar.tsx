@@ -32,7 +32,7 @@ export default function FeatureBar({ title, titleAccent, items, columns = 5 }: F
       ref={containerRef}
       className="animate-on-scroll fade-up"
     >
-      <div className="rounded-[14px] border-[2px] border-clay-mint-border bg-white/80 backdrop-blur-sm px-[2vw] py-[1.5vh] shadow-[0_2px_0_0_#B9DFA0,0_6px_12px_oklch(0_0 0/0.05)]">
+      <div className="rounded-[14px] border-2 border-clay-mint-border bg-white/80 backdrop-blur-sm px-[2vw] py-[1.5vh] shadow-[0_2px_0_0_#B9DFA0,0_6px_12px_oklch(0_0 0/0.05)]">
         <h3 className="font-display text-[clamp(13px,2vh,16px)] font-bold text-clay-green-900 text-center mb-[1.2vh]">
           {title}{" "}
           {titleAccent && <span className="text-clay-green-700">{titleAccent}</span>}
@@ -47,7 +47,7 @@ export default function FeatureBar({ title, titleAccent, items, columns = 5 }: F
               className="animate-on-scroll fade-up flex flex-col items-center text-center gap-[0.6vh] px-[0.5vw]"
             >
               <span className={cn(
-                "flex size-[clamp(32px,4.5vh,40px)] items-center justify-center rounded-full border-[2px]",
+                "flex size-[clamp(32px,4.5vh,40px)] items-center justify-center rounded-full border-2",
                 item.bg,
                 item.border
               )}>

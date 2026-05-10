@@ -1,0 +1,49 @@
+# Tiny Tummies - AI-Ready Website Documentation
+
+## Overview
+Tiny Tummies provides fresh, hygienic, and kid-loved meal boxes for children (2-6 years), delivered to schools and homes across Bengaluru, India.
+
+## Business
+- **Service**: Children's meal delivery (subscription-based)
+- **Location**: Bengaluru, Karnataka, India
+- **Target Audience**: Parents of children aged 2-6 years
+- **Key Value Props**: Freshly prepared daily, nutritionist-planned, hygienic stainless steel boxes, school-friendly delivery
+
+## Pages
+- `/` - Homepage with hero, how it works, pricing, and about sections
+- `/terms` - Terms and Conditions
+- `/get-started` - Signup page
+
+## Tech Stack
+- Next.js 16 with App Router
+- React 19
+- TypeScript (strict mode)
+- Tailwind CSS 4
+- Framer Motion for animations
+- Lucide React for icons
+
+## Data Structure
+- `data/site.ts` - Contact info, nav links, site constants
+- `data/hero.ts` - Hero section content
+- `data/how-it-works.ts` - Problem/solution content
+- `data/pricing.ts` - Plans and features
+- `data/about.ts` - Company story and values
+- `data/terms.ts` - Terms and FAQs
+
+## Architecture Pattern
+- **View**: Components in `components/sections/` and `components/ui/` - pure UI, no business logic
+- **Data**: All static content in `data/` - typed interfaces, no duplication
+- **Hooks**: Custom hooks in `lib/hooks/` for client-side logic (scroll animations)
+- **Utils**: Shared utilities in `lib/utils/` for class merging and styling
+
+## Key Files
+- `app/page.tsx` - Homepage (thin route, composes sections)
+- `app/layout.tsx` - Root layout with metadata
+- `components/claymorph/` - Design system components
+- `components/ui/FeatureBar.tsx` - Reusable feature display
+- `lib/hooks/useScrollAnimation.ts` - Scroll-triggered animations
+
+## Content Topics
+- Children's nutrition and healthy eating
+- School lunch solutions for busy parents
+- Meal subscription services in India
