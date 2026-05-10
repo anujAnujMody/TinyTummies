@@ -96,7 +96,7 @@ export default function HeroSection() {
                     />
                   </div>
 
-                  <div className="absolute -top-[2%] -right-[8%] flex flex-col items-center justify-center rounded-full bg-white border-[3px] border-clay-mint-border" style={{ boxShadow: clayShadow("mint") }}>
+                  <div className="absolute -top-[2%] -right-[8%] flex flex-col items-center justify-center rounded-full bg-white border-[3px] border-clay-mint-border p-3 md:p-4" style={{ boxShadow: clayShadow("mint") }}>
                     <span className="font-display text-[clamp(20px,2.8vh,28px)] font-bold text-clay-green-700 leading-none p-[clamp(8px,1.2vh,14px)]">100%</span>
                     <span className="font-display text-[clamp(10px,1.3vh,13px)] font-semibold text-clay-green-700 leading-tight">Fresh</span>
                     <span className="font-display text-[clamp(10px,1.3vh,13px)] font-semibold text-clay-green-700 leading-tight">& Hygienic</span>

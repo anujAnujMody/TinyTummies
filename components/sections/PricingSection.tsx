@@ -28,7 +28,7 @@ export default function PricingSection() {
   return (
     <PandaBackground count={3} className="snap-start snap-always min-h-[100dvh] flex flex-col">
       <section id="pricing" className="relative flex flex-col flex-1">
-        <div className="w-full px-4 md:px-[3vw] pt-16 md:pt-[calc(72px+2vh)] pb-3 md:pb-[1.5vh] flex flex-col flex-1">
+        <div className="w-full px-4 md:px-[3vw] pt-20 md:pt-[calc(72px+2vh)] pb-3 md:pb-[1.5vh] flex flex-col flex-1">
           <div className="flex-1 flex items-center justify-center">
             <div className="flex flex-col gap-3 md:gap-[2vh] max-w-250 mx-auto w-full">
               <div className="text-center shrink-0">
@@ -51,7 +51,7 @@ export default function PricingSection() {
                     <div
                       key={plan.id}
                       className={cn(
-                        "relative flex flex-col rounded-xl md:rounded-md border-[3px] p-3 md:p-[1.5vh] transition-all duration-200 hover:translate-y-0.5 min-w-[80vw] snap-center flex-shrink-0 md:min-w-0 md:w-full md:flex-shrink-1",
+                        "relative flex flex-col rounded-xl md:rounded-md border-[3px] p-2.5 md:p-[1.2vh] transition-all duration-200 hover:translate-y-0.5 min-w-[80vw] snap-center flex-shrink-0 md:min-w-0 md:w-full md:flex-shrink-1",
                         colors.cardBg,
                         colors.cardBorder
                       )}
@@ -68,44 +68,44 @@ export default function PricingSection() {
                         </div>
                       )}
 
-                      <div className="flex justify-center mb-1.5 md:mb-[1vh] mt-4">
-                        <span className={cn("flex size-9 md:size-[clamp(36px,5vh,48px)] items-center justify-center rounded-full", colors.iconBg)}>
-                          <Icon className={cn("size-4.5 md:size-[clamp(18px,2.5vh,24px)]", colors.iconColor)} strokeWidth={2} />
+                      <div className="flex justify-center mb-1 md:mb-[0.8vh] mt-3">
+                        <span className={cn("flex size-8 md:size-[clamp(32px,4.5vh,44px)] items-center justify-center rounded-full", colors.iconBg)}>
+                          <Icon className={cn("size-4 md:size-[clamp(16px,2.2vh,22px)]", colors.iconColor)} strokeWidth={2} />
                         </span>
                       </div>
 
-                      <h3 className={cn("font-display text-xs md:text-[clamp(14px,2.2vh,18px)] font-bold text-center max-[380px]:text-[11px]", colors.nameColor)}>
+                      <h3 className={cn("font-display text-xs md:text-[clamp(13px,2vh,17px)] font-bold text-center max-[380px]:text-[11px]", colors.nameColor)}>
                         {plan.name}
                       </h3>
-                      <p className="font-body text-[11px] md:text-[clamp(10px,1.5vh,12px)] text-ink-muted text-center mt-0.5 max-[380px]:text-[10px]">
+                      <p className="font-body text-[10px] md:text-[clamp(9px,1.3vh,11px)] text-ink-muted text-center mt-0.5 max-[380px]:text-[9px]">
                         {plan.tagline}
                       </p>
 
-                      <div className="text-center mt-1.5 md:mt-[1vh]">
-                        <span className="font-display text-lg md:text-[clamp(20px,3.5vh,28px)] font-bold text-ink max-[380px]:text-base">
+                      <div className="text-center mt-1 md:mt-[0.8vh]">
+                        <span className="font-display text-base md:text-[clamp(18px,3vh,26px)] font-bold text-ink max-[380px]:text-base">
                           {plan.price}
                         </span>
-                        <span className="font-body text-[11px] md:text-[clamp(10px,1.5vh,12px)] text-ink-muted max-[380px]:text-[10px]">{plan.period}</span>
+                        <span className="font-body text-[10px] md:text-[clamp(9px,1.3vh,11px)] text-ink-muted max-[380px]:text-[9px]">{plan.period}</span>
                       </div>
-                      <p className={cn("font-body text-[9px] md:text-[clamp(9px,1.2vh,11px)] text-center mt-0.5 font-medium max-[380px]:text-[8px]", colors.perMealColor)}>
+                      <p className={cn("font-body text-[8px] md:text-[clamp(8px,1vh,10px)] text-center mt-0.5 font-medium max-[380px]:text-[8px]", colors.perMealColor)}>
                         {plan.perMeal}
                       </p>
 
                       <div className="flex-grow">
-                        <ul className="flex flex-col gap-1 md:gap-[0.8vh] mt-2 md:mt-[1.5vh]">
+                        <ul className="flex flex-col gap-0.5 md:gap-[0.6vh] mt-1.5 md:mt-[1vh]">
                           {plan.features.map((feature) => (
-                            <li key={feature} className="flex items-center gap-1.5 md:gap-[0.8vw]">
-                              <span className={cn("flex size-4 md:size-[clamp(16px,2vh,18px)] shrink-0 items-center justify-center rounded-full max-[380px]:size-3.5", colors.checkColor)}>
-                                <Check className="size-2.5 md:size-[clamp(10px,1.2vh,12px)] text-white max-[380px]:size-2" strokeWidth={3} />
+                            <li key={feature} className="flex items-center gap-1.5 md:gap-[0.6vw]">
+                              <span className={cn("flex size-3.5 md:size-[clamp(14px,1.8vh,16px)] shrink-0 items-center justify-center rounded-full max-[380px]:size-3", colors.checkColor)}>
+                                <Check className="size-2 md:size-[clamp(8px,1vh,10px)] text-white max-[380px]:size-2" strokeWidth={3} />
                               </span>
-                              <span className="font-body text-[11px] md:text-[clamp(10px,1.5vh,12px)] text-ink max-[380px]:text-[10px]">{feature}</span>
+                              <span className="font-body text-[10px] md:text-[clamp(9px,1.3vh,11px)] text-ink max-[380px]:text-[9px]">{feature}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <div className="flex justify-end pt-2 md:pt-[1vh]">
-                        <div className="w-20 h-20 md:w-[clamp(100px,14vh,140px)] md:h-[clamp(100px,14vh,140px)] relative max-[380px]:w-16 max-[380px]:h-16">
+                      <div className="flex justify-end pt-1 md:pt-[0.5vh]">
+                        <div className="w-14 h-14 md:w-[clamp(70px,10vh,100px)] md:h-[clamp(70px,10vh,100px)] relative max-[380px]:w-12 max-[380px]:h-12">
                           <Image
                             src={`/images/pandas/${pandaImages[i]}`}
                             alt=""
