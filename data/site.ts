@@ -14,6 +14,7 @@ export const navLinks: NavLink[] = [
   { label: "How It Works", href: "/#how" },
   { label: "Pricing", href: "/#pricing" },
   { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export const trustStrip: TrustStripItem[] = [

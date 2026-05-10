@@ -52,12 +52,13 @@ export default function Navbar() {
   };
 
   return (
-    <header className={cn("fixed inset-x-0 top-0 z-50 transition-all duration-300", scrolled ? "top-3" : "top-4")}>
+    <>
+    <header className="fixed top-4 left-4 right-4 z-50">
       <nav className={cn(
-        "mx-auto flex h-18 max-w-275 items-center justify-between px-4 sm:px-6 transition-all duration-300",
+        "hidden lg:flex h-16 items-center justify-between px-6 transition-all duration-300",
         scrolled
-          ? "rounded-full border-[3px] border-clay-mint-border bg-white/92 backdrop-blur-xl"
-          : "rounded-full border-[3px] border-clay-mint-border/50 bg-white/80 backdrop-blur-md"
+          ? "rounded-2xl border-[3px] border-clay-mint-border bg-white/92 backdrop-blur-xl"
+          : "rounded-2xl border-[3px] border-clay-mint-border/50 bg-white/80 backdrop-blur-md"
       )}
         style={{ boxShadow: "0 4px 0 0 #B9DFA0, 0 12px 24px oklch(0 0 0 / 0.08)" }}
       >
@@ -65,7 +66,7 @@ export default function Navbar() {
           <Image src="/images/logo-full.png" alt="Tiny Tummies" width={160} height={54} priority className="h-10 w-auto object-contain" />
         </Link>
 
-        <div className="hidden items-center gap-1 lg:flex">
+        <div className="flex items-center gap-1">
           {navLinks.map((link) => {
             const id = link.href.includes("#") ? link.href.split("#")[1] : "";
             const isActive = activeId === id || (id === "" && activeId === "hero");
@@ -86,7 +87,7 @@ export default function Navbar() {
           })}
         </div>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="flex items-center gap-3">
           <Link
             href={GOOGLE_FORM_URL}
             target="_blank"
@@ -97,54 +98,55 @@ export default function Navbar() {
             Get Started <ArrowRight className="size-4" />
           </Link>
         </div>
-
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="inline-flex size-11 items-center justify-center rounded-full border-[3px] border-clay-mint-border bg-white text-clay-green-700 lg:hidden"
-          aria-label="Open navigation"
-        >
-          <MenuIcon className="size-5" />
-        </button>
       </nav>
 
-      {open && (
-        <div className="fixed inset-0 z-[60] bg-ink/30 p-4 backdrop-blur-sm lg:hidden" role="dialog" aria-modal="true">
-          <div className="ml-auto flex max-w-sm flex-col gap-2 rounded-[28px] border-[3px] border-clay-mint-border bg-clay-cream p-5" style={{ boxShadow: "0 4px 0 0 #B9DFA0, 0 16px 40px oklch(0 0 0 / 0.12)" }}>
-            <div className="mb-2 flex items-center justify-between">
-              <Image src="/images/logo-full.png" alt="Tiny Tummies" width={130} height={44} className="h-9 w-auto object-contain" />
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="inline-flex size-10 items-center justify-center rounded-full border-[3px] border-clay-mint-border bg-white text-clay-green-700"
-                aria-label="Close navigation"
-              >
-                <X className="size-5" />
-              </button>
-            </div>
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="rounded-2xl px-4 py-3 font-display text-lg font-bold text-ink hover:bg-clay-mint"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Link
-              href={GOOGLE_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-              className="mt-3 inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-clay-orange-500 border-[3px] border-clay-orange-700 font-display font-bold text-white"
-              style={{ boxShadow: "0 4px 0 0 #E65100" }}
-            >
-              Get Started <ArrowRight className="size-5" />
-            </Link>
-          </div>
-        </div>
-      )}
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="flex size-12 items-center justify-center rounded-xl border-[3px] border-clay-mint-border bg-white text-clay-green-700 shadow-md lg:hidden"
+        aria-label="Open navigation"
+      >
+        <MenuIcon className="size-6" />
+      </button>
     </header>
+
+    {open && (
+      <div className="fixed inset-0 z-[60] bg-ink/40 p-4 backdrop-blur-sm lg:hidden" role="dialog" aria-modal="true">
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          className="absolute top-4 right-4 flex size-12 items-center justify-center rounded-xl border-[3px] border-clay-mint-border bg-white text-clay-green-700"
+          aria-label="Close navigation"
+        >
+          <X className="size-6" />
+        </button>
+        <div className="mt-20 flex flex-col gap-3 rounded-2xl border-[3px] border-clay-mint-border bg-clay-cream p-5" style={{ boxShadow: "0 4px 0 0 #B9DFA0, 0 16px 40px oklch(0 0 0 / 0.15)" }}>
+          <Link href="/" onClick={() => setOpen(false)} className="mb-2 flex shrink-0 items-center self-center">
+            <Image src="/images/logo-full.png" alt="Tiny Tummies" width={140} height={47} className="h-10 w-auto object-contain" />
+          </Link>
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
+              className="rounded-xl px-4 py-3 font-display text-lg font-bold text-ink hover:bg-clay-mint"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            href={GOOGLE_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="mt-2 inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-clay-orange-500 border-[3px] border-clay-orange-700 font-display text-base font-bold text-white"
+            style={{ boxShadow: "0 4px 0 0 #E65100" }}
+          >
+            Get Started <ArrowRight className="size-5" />
+          </Link>
+        </div>
+      </div>
+    )}
+    </>
   );
 }

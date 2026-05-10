@@ -1,4 +1,4 @@
-import { Leaf, ChefHat, Shield, Truck, Smile } from "lucide-react";
+import { Leaf, Shield, Truck, Smile } from "lucide-react";
 import type { Plan, FeatureItem } from "./types";
 
 export const plans: Plan[] = [
@@ -60,14 +60,6 @@ export const plans: Plan[] = [
 ];
 
 export const whyChooseFeatures: FeatureItem[] = [
-  {
-    icon: ChefHat,
-    title: "Nutritionist Planned Meals",
-    text: "Designed for growing children.",
-    color: "text-clay-green-700",
-    border: "border-clay-green-700/20",
-    bg: "bg-clay-mint",
-  },
   {
     icon: Leaf,
     title: "No Junk, Ever",

@@ -1,4 +1,4 @@
-import { Target, Heart, Star, Lightbulb, ChefHat, Rocket, TrendingUp, Sparkles, Leaf, ShieldCheck, Truck, Sprout } from "lucide-react";
+import { Target, Heart, Star, Lightbulb, ChefHat, Rocket, TrendingUp, Sparkles, Leaf, ShieldCheck, Truck } from "lucide-react";
 import type { ValueCard, TimelineStep, FeatureItem } from "./types";
 
 export const valueCards: ValueCard[] = [
@@ -39,7 +39,6 @@ export const timeline: TimelineStep[] = [
 export const aboutFeatures: FeatureItem[] = [
   { icon: Leaf, title: "100% Natural", text: "No preservatives", color: "text-clay-green-700", border: "border-clay-green-200", bg: "bg-clay-green-50" },
   { icon: ShieldCheck, title: "Hygienic", text: "FSSAI certified", color: "text-clay-green-700", border: "border-clay-green-200", bg: "bg-clay-green-50" },
-  { icon: Sprout, title: "Nutritious", text: "Expert planned", color: "text-clay-green-700", border: "border-clay-green-200", bg: "bg-clay-green-50" },
   { icon: Heart, title: "Made with Love", text: "Like parents do", color: "text-clay-orange-500", border: "border-clay-orange-200", bg: "bg-clay-orange-50" },
   { icon: Truck, title: "On-time", text: "Every morning", color: "text-clay-green-700", border: "border-clay-green-200", bg: "bg-clay-green-50" },
 ];
