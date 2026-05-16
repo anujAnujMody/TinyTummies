@@ -36,21 +36,24 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const main = document.getElementById("main");
-    if (!main) return;
-
     const onScroll = () => {
-      const scrollTop = main.scrollTop;
-      const sectionHeight = window.innerHeight;
-      const index = Math.round(scrollTop / sectionHeight);
-      const clampedIndex = Math.max(0, Math.min(index, SECTION_IDS.length - 1));
-      setActiveId(SECTION_IDS[clampedIndex]);
+      const scrollTop = window.scrollY;
       setScrolled(scrollTop > 12);
+
+      // Find active section
+      const sections = SECTION_IDS.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const rect = sections[i].getBoundingClientRect();
+        if (rect.top <= 120) {
+          setActiveId(SECTION_IDS[i]);
+          break;
+        }
+      }
     };
 
     onScroll();
-    main.addEventListener("scroll", onScroll, { passive: true });
-    return () => main.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -63,12 +66,7 @@ export default function Navbar() {
     }
     if (href === "/" && window.location.pathname === "/") {
       e.preventDefault();
-      const container = document.getElementById("main");
-      if (container) {
-        container.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
       setOpen(false);
     }
   };
@@ -129,14 +127,32 @@ export default function Navbar() {
           </div>
         </nav>
 
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="flex size-12 items-center justify-center rounded-xl border-[3px] border-clay-mint-border bg-white text-clay-green-700 shadow-md lg:hidden"
-          aria-label="Open navigation"
-        >
-          <MenuIcon className="size-6" />
-        </button>
+        {/* Mobile navbar */}
+        <div className="flex items-center justify-between lg:hidden">
+          <Link href="/" onClick={(e) => handleNavClick(e, "/")} className="flex items-center gap-2 cursor-pointer">
+            <Image
+              src="/images/panda-bento.JPG"
+              alt="Tiny Tummies"
+              width={40}
+              height={40}
+              className="h-10 w-10 object-contain rounded-lg"
+            />
+            <div className="flex flex-col">
+              <div className="flex items-baseline gap-0.5">
+                <span className="font-display text-base font-bold tracking-tight text-clay-green-700">Tiny</span>
+                <span className="font-display text-base font-bold tracking-tight text-clay-orange-500">Tummies</span>
+              </div>
+            </div>
+          </Link>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="flex size-11 items-center justify-center rounded-xl border-[3px] border-clay-mint-border bg-white text-clay-green-700 shadow-md"
+            aria-label="Open navigation"
+          >
+            <MenuIcon className="size-5" />
+          </button>
+        </div>
       </header>
 
       {open && (
@@ -144,13 +160,13 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="absolute top-4 right-4 flex size-12 items-center justify-center rounded-xl border-[3px] border-clay-mint-border bg-white text-clay-green-700"
+            className="absolute top-4 right-4 flex size-11 items-center justify-center rounded-xl border-[3px] border-clay-mint-border bg-white text-clay-green-700"
             aria-label="Close navigation"
           >
-            <X className="size-6" />
+            <X className="size-5" />
           </button>
-          <div className="mt-20 flex flex-col gap-3 rounded-2xl border-[3px] border-clay-mint-border bg-clay-cream p-5" style={{ boxShadow: "0 4px 0 0 #B9DFA0, 0 16px 40px oklch(0 0 0 / 0.15)" }}>
-            <Link href="/" onClick={(e) => handleNavClick(e, "/")} className="mb-2 flex shrink-0 items-center self-center cursor-pointer">
+          <div className="mt-16 flex flex-col gap-2 rounded-2xl border-[3px] border-clay-mint-border bg-clay-cream p-4" style={{ boxShadow: "0 4px 0 0 #B9DFA0, 0 16px 40px oklch(0 0 0 / 0.15)" }}>
+            <Link href="/" onClick={(e) => handleNavClick(e, "/")} className="mb-1 flex shrink-0 items-center self-center cursor-pointer">
               <PandaLogo />
             </Link>
             {navLinks.map((link) => (
@@ -158,7 +174,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="rounded-xl px-4 py-3 font-display text-lg font-medium text-ink hover:bg-clay-mint transition-colors duration-200"
+                className="rounded-xl px-4 py-3 font-display text-base font-medium text-ink hover:bg-clay-mint transition-colors duration-200"
               >
                 {link.label}
               </Link>

@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Star, X, Maximize2 } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { cn, clayShadow } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { galleryImages, testimonials } from "@/data/gallery";
 import PandaBackground from "@/components/ui/PandaBackground";
 
@@ -29,10 +29,10 @@ function ClayArrowButton({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        "flex items-center justify-center rounded-full bg-white border-[3px] border-clay-mint-border text-clay-green-700 transition-all duration-200 hover:scale-110 disabled:opacity-40 disabled:hover:scale-100 z-10",
+        "flex items-center justify-center rounded-full bg-white/90 border border-white/40 text-clay-green-700 transition-all duration-200 hover:scale-110 disabled:opacity-40 disabled:hover:scale-100 z-10 backdrop-blur-sm",
         className
       )}
-      style={{ boxShadow: clayShadow("mint") }}
+      style={{ boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}
       aria-label={ariaLabel}
     >
       {children}
@@ -45,15 +45,12 @@ function ImageCarousel({
   onImageClick,
 }: {
   images: typeof galleryImages;
-  onImageClick: (index: number) => void;
+  onImageClick: (_index: number) => void;
 }) {
-  const autoplayRef = useRef<ReturnType<typeof Autoplay> | null>(null);
-  if (!autoplayRef.current) {
-    autoplayRef.current = Autoplay({ delay: 4000, stopOnInteraction: true });
-  }
+  const autoplayPlugin = useMemo(() => Autoplay({ delay: 4000, stopOnInteraction: true }), []);
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align: "center", skipSnaps: false },
-    [autoplayRef.current]
+    [autoplayPlugin]
   );
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -76,9 +73,10 @@ function ImageCarousel({
     if (!emblaApi) return;
     const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
     emblaApi.on("select", onSelect);
-    setSelectedIndex(emblaApi.selectedScrollSnap());
+    const rafId = requestAnimationFrame(() => setSelectedIndex(emblaApi.selectedScrollSnap()));
     return () => {
       emblaApi.off("select", onSelect);
+      cancelAnimationFrame(rafId);
     };
   }, [emblaApi]);
 
@@ -94,14 +92,14 @@ function ImageCarousel({
       {/* Carousel */}
       <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
         <div className="flex">
-          {images.map((image, index) => (
+          {images.map((image, idx) => (
             <div
-              key={`${image.src}-${index}`}
+              key={`${image.src}-${idx}`}
               className="flex-[0_0_75%] md:flex-[0_0_55%] min-w-0 px-1.5 md:px-2"
             >
               <div
-                className="relative aspect-[3/4] md:aspect-[3/2] rounded-xl border-[3px] border-white overflow-hidden group cursor-pointer"
-                onClick={() => onImageClick(index)}
+                className="relative aspect-[3/4] md:aspect-[3/2] rounded-2xl border-2 border-white/60 overflow-hidden group cursor-pointer shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
+                onClick={() => onImageClick(idx)}
               >
                 <Image
                   src={image.src}
@@ -109,7 +107,7 @@ function ImageCarousel({
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 768px) 85vw, 55vw"
-                  priority={index === selectedIndex}
+                  priority={idx === selectedIndex}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 {image.alt && (
@@ -117,11 +115,10 @@ function ImageCarousel({
                     <p className="text-white text-xs md:text-sm font-medium truncate">{image.alt}</p>
                   </div>
                 )}
-                {/* Expand button — always visible on mobile, hover on desktop */}
+                {/* Expand button */}
                 <button
-                  onClick={(e) => { e.stopPropagation(); onImageClick(index); }}
-                  className="absolute top-2 right-2 z-10 flex size-8 md:size-9 items-center justify-center rounded-full bg-white/90 border-2 border-clay-mint-border text-clay-green-700 opacity-80 md:opacity-0 md:group-hover:opacity-100 transition-all duration-200 hover:scale-110 active:scale-95"
-                  style={{ boxShadow: "0 2px 0 0 #B9DFA0, 0 4px 8px oklch(0 0 0 / 0.1)" }}
+                  onClick={(e) => { e.stopPropagation(); onImageClick(idx); }}
+                  className="absolute top-2 right-2 z-10 flex size-8 md:size-9 items-center justify-center rounded-full bg-white/90 border border-white/40 text-clay-green-700 opacity-80 md:opacity-0 md:group-hover:opacity-100 transition-all duration-200 hover:scale-110 active:scale-95 shadow-[0_4px_20px_rgba(0,0,0,0.1)]"
                   aria-label={`View ${image.alt}`}
                 >
                   <Maximize2 className="size-4 md:size-5" />
@@ -139,7 +136,7 @@ function ImageCarousel({
         </ClayArrowButton>
       </div>
 
-      {/* Dots — hidden on mobile, show counter instead */}
+      {/* Dots */}
       <div className="hidden md:flex justify-center gap-1.5 mt-3">
         {images.map((_, index) => (
           <button
@@ -157,7 +154,7 @@ function ImageCarousel({
       </div>
       {/* Mobile counter */}
       <div className="flex md:hidden justify-center mt-2">
-        <span className="font-display text-xs font-bold text-clay-green-700 bg-white rounded-full px-3 py-1 border-2 border-clay-mint-border">
+        <span className="font-display text-xs font-bold text-clay-green-700 bg-white/80 rounded-full px-3 py-1 border border-white/40 backdrop-blur-md">
           {selectedIndex + 1} / {images.length}
         </span>
       </div>
@@ -178,13 +175,10 @@ function ImageCarousel({
 }
 
 function TestimonialCarousel() {
-  const autoplayRef = useRef<ReturnType<typeof Autoplay> | null>(null);
-  if (!autoplayRef.current) {
-    autoplayRef.current = Autoplay({ delay: 6000, stopOnInteraction: true });
-  }
+  const autoplayPlugin = useMemo(() => Autoplay({ delay: 6000, stopOnInteraction: true }), []);
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align: "center", skipSnaps: false },
-    [autoplayRef.current]
+    [autoplayPlugin]
   );
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -207,9 +201,10 @@ function TestimonialCarousel() {
     if (!emblaApi) return;
     const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
     emblaApi.on("select", onSelect);
-    setSelectedIndex(emblaApi.selectedScrollSnap());
+    const rafId = requestAnimationFrame(() => setSelectedIndex(emblaApi.selectedScrollSnap()));
     return () => {
       emblaApi.off("select", onSelect);
+      cancelAnimationFrame(rafId);
     };
   }, [emblaApi]);
 
@@ -231,8 +226,7 @@ function TestimonialCarousel() {
               className="flex-[0_0_80%] md:flex-[0_0_60%] min-w-0 px-2"
             >
               <div
-                className="rounded-xl border-2 border-clay-mint-border/50 bg-white/80 px-4 py-3 md:px-6 md:py-4 h-[150px] md:h-[190px] flex flex-col backdrop-blur-sm overflow-hidden"
-                style={{ boxShadow: "0 2px 0 0 #B9DFA0, 0 6px 12px oklch(0 0 0 / 0.06)" }}
+                className="rounded-2xl border border-white/40 bg-white/80 backdrop-blur-md px-4 py-3 md:px-6 md:py-4 h-[150px] md:h-[190px] flex flex-col overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.08)]"
               >
                 <div className="flex gap-0.5 mb-1.5 md:mb-2 shrink-0">
                   {Array.from({ length: t.rating }).map((_, i) => (
@@ -243,8 +237,8 @@ function TestimonialCarousel() {
                   &ldquo;{t.quote}&rdquo;
                 </p>
                 <div className="mt-2 md:mt-3 flex items-center gap-2 shrink-0">
-                  <div className="flex size-7 md:size-9 items-center justify-center rounded-full bg-clay-mint border-2 border-clay-mint-border">
-                    <span className="font-display text-xs md:text-base font-bold text-clay-green-700">
+                  <div className="flex size-6 md:size-8 items-center justify-center rounded-full bg-clay-mint/50 border border-white/40">
+                    <span className="font-display text-xs md:text-sm font-bold text-clay-green-700">
                       {t.name.charAt(0)}
                     </span>
                   </div>
@@ -357,8 +351,7 @@ function LightboxModal({
       {/* Close Button */}
       <button
         onClick={(e) => { e.stopPropagation(); onClose(); }}
-        className="absolute top-4 right-4 z-[201] flex size-10 md:size-12 items-center justify-center rounded-full bg-white border-[3px] border-clay-mint-border text-clay-green-700 transition-all duration-200 hover:scale-110"
-        style={{ boxShadow: "0 4px 0 0 #B9DFA0, 0 8px 16px oklch(0 0 0 / 0.15)" }}
+        className="absolute top-4 right-4 z-[201] flex size-10 md:size-12 items-center justify-center rounded-full bg-white/90 border border-white/40 text-clay-green-700 transition-all duration-200 hover:scale-110 shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
         aria-label="Close"
       >
         <X className="size-5 md:size-6" />
@@ -367,8 +360,7 @@ function LightboxModal({
       {/* Prev Arrow */}
       <button
         onClick={(e) => { e.stopPropagation(); onPrev(); }}
-        className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-[201] flex size-10 md:size-12 items-center justify-center rounded-full bg-white border-[3px] border-clay-mint-border text-clay-green-700 transition-all duration-200 hover:scale-110"
-        style={{ boxShadow: "0 4px 0 0 #B9DFA0, 0 8px 16px oklch(0 0 0 / 0.15)" }}
+        className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-[201] flex size-10 md:size-12 items-center justify-center rounded-full bg-white/90 border border-white/40 text-clay-green-700 transition-all duration-200 hover:scale-110 shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
         aria-label="Previous image"
       >
         <ChevronLeft className="size-5 md:size-6" />
@@ -376,8 +368,7 @@ function LightboxModal({
 
       {/* Image Container */}
       <div
-        className="relative max-w-[92vw] max-h-[88vh] rounded-2xl overflow-hidden border-[3px] border-white"
-        style={{ boxShadow: clayShadow("clay") }}
+        className="relative max-w-[92vw] max-h-[88vh] rounded-2xl overflow-hidden border border-white/60 shadow-[0_4px_30px_rgba(0,0,0,0.2)]"
         onClick={(e) => e.stopPropagation()}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -402,8 +393,7 @@ function LightboxModal({
       {/* Next Arrow */}
       <button
         onClick={(e) => { e.stopPropagation(); onNext(); }}
-        className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-[201] flex size-10 md:size-12 items-center justify-center rounded-full bg-white border-[3px] border-clay-mint-border text-clay-green-700 transition-all duration-200 hover:scale-110"
-        style={{ boxShadow: "0 4px 0 0 #B9DFA0, 0 8px 16px oklch(0 0 0 / 0.15)" }}
+        className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-[201] flex size-10 md:size-12 items-center justify-center rounded-full bg-white/90 border border-white/40 text-clay-green-700 transition-all duration-200 hover:scale-110 shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
         aria-label="Next image"
       >
         <ChevronRight className="size-5 md:size-6" />
@@ -411,7 +401,7 @@ function LightboxModal({
 
       {/* Counter */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[201]">
-        <span className="inline-flex items-center rounded-full bg-white px-3 py-1 font-display text-xs font-bold text-clay-green-900 border-2 border-clay-mint-border">
+        <span className="inline-flex items-center rounded-full bg-white/90 px-3 py-1 font-display text-xs font-bold text-clay-green-900 border border-white/40 backdrop-blur-md">
           {activeIndex + 1} / {images.length}
         </span>
       </div>
@@ -425,7 +415,7 @@ export default function GallerySection() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    requestAnimationFrame(() => setMounted(true));
   }, []);
 
   const openLightbox = (index: number) => {
@@ -446,28 +436,28 @@ export default function GallerySection() {
   };
 
   return (
-    <PandaBackground count={3} className="snap-start snap-always min-h-[100dvh] flex flex-col">
-      <section id="gallery" className="relative flex flex-col flex-1">
-        <div className="w-full px-4 md:px-[3vw] pt-14 md:pt-[calc(72px+1.5vh)] pb-3 md:pb-[2vh] flex flex-col flex-1">
+    <PandaBackground count={3} className="flex flex-col">
+      <section id="gallery" className="relative flex flex-col py-12 sm:py-16 md:py-24">
+        <div className="w-full px-4 sm:px-5 md:px-[5vw] flex flex-col">
           {/* Header */}
-          <div className="text-center shrink-0">
-            <h2 className="font-display text-lg md:text-[clamp(1.5rem,4.5vh,3rem)] font-bold leading-[1.05] tracking-tight text-clay-green-900 max-[380px]:text-base">
+          <div className="text-center shrink-0 mb-6 sm:mb-8 md:mb-12">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold leading-tight tracking-tight text-clay-green-900">
               Happy <span className="text-clay-green-700">moments</span>{" "}
               <span className="text-clay-orange-500">captured.</span>
             </h2>
-            <p className="font-body text-[10px] md:text-[clamp(12px,1.8vh,15px)] text-ink-muted mt-0.5 md:mt-[0.8vh] max-[380px]:text-[9px]">
+            <p className="font-body text-sm sm:text-sm md:text-base text-ink-muted mt-1.5 sm:mt-2">
               See the joy in every bite
             </p>
           </div>
 
           {/* Image Carousel */}
-          <div className="mt-2 md:mt-[1.5vh] shrink-0">
+          <div className="shrink-0">
             <ImageCarousel images={galleryImages} onImageClick={openLightbox} />
           </div>
 
           {/* Testimonials Section */}
-          <div className="mt-3 md:mt-[1.5vh] shrink-0">
-            <p className="font-display text-[10px] md:text-sm font-bold text-clay-green-700 text-center mb-1.5 md:mb-[0.8vh]">
+          <div className="mt-8 sm:mt-10 md:mt-14 shrink-0">
+            <p className="font-display text-sm sm:text-sm md:text-base font-bold text-clay-green-700 text-center mb-3 sm:mb-4">
               What Parents Say
             </p>
             <TestimonialCarousel />

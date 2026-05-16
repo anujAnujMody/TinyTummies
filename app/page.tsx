@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main id="main" className="h-screen overflow-y-scroll snap-y snap-mandatory lg:snap-mandatory pt-24">
+      <main id="main" className="pt-24">
         <HeroSection />
         <HowItWorksSection />
         <PricingSection />
@@ -29,11 +29,17 @@ export default function Home() {
         <AboutSection />
 
         {/* Contact Section */}
-        <footer id="contact" className="snap-start snap-always min-h-[100dvh] flex flex-col bg-clay-cream">
-          <PandaBackground count={3} className="flex-1 flex flex-col">
-            <div className="mx-auto w-full max-w-3xl px-5 pt-20 pb-8 flex flex-col flex-1 items-center justify-center">
+        <footer id="contact" className="bg-clay-cream">
+          <PandaBackground count={3}>
+            {/* Organic blob background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="absolute top-20 left-1/4 w-64 h-64 bg-gradient-to-br from-clay-mint/30 to-clay-butter/20 rounded-full blur-3xl" />
+              <div className="absolute bottom-40 right-1/4 w-48 h-48 bg-gradient-to-br from-clay-orange-200/20 to-clay-green-200/20 rounded-full blur-2xl" />
+            </div>
+
+            <div className="relative mx-auto w-full max-w-3xl px-5 py-12 md:py-16 flex flex-col items-center gap-6">
               {/* Mascot */}
-              <div className="w-32 sm:w-36 mb-5 sm:mb-6">
+              <div className="w-28 sm:w-32">
                 <PandaCompanion pose="wave" />
               </div>
 
@@ -41,39 +47,39 @@ export default function Home() {
               <Type variant="display-lg" className="text-clay-green-900 text-center text-2xl sm:text-3xl">
                 Get in touch
               </Type>
-              <Type variant="lead" className="mt-2 sm:mt-3 text-ink-muted text-center text-sm sm:text-base max-w-md">
+              <Type variant="lead" className="text-ink-muted text-center text-sm sm:text-base max-w-md">
                 Have questions? We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
               </Type>
 
               {/* Contact Methods */}
-              <div className="flex items-center gap-4 sm:gap-8 mt-6 sm:mt-8">
+              <div className="flex items-center gap-6 sm:gap-10">
                 <a href={contact.phoneHref} className="flex flex-col items-center gap-1.5 group cursor-pointer">
-                  <span className="flex size-11 sm:size-12 items-center justify-center rounded-full bg-clay-mint border-[2px] border-clay-green-700 text-clay-green-700 transition-all duration-200 group-hover:bg-clay-green-700 group-hover:text-white group-hover:scale-105">
-                    <Phone className="size-4.5 sm:size-5" />
+                  <span className="flex size-12 sm:size-14 items-center justify-center rounded-full bg-clay-mint/80 border border-clay-green-200 text-clay-green-700 transition-all duration-200 group-hover:bg-clay-green-700 group-hover:text-white group-hover:scale-105 backdrop-blur-sm shadow-[0_4px_16px_rgba(0,0,0,0.08)]">
+                    <Phone className="size-5 sm:size-6" />
                   </span>
-                  <span className="text-xs font-medium text-ink-muted group-hover:text-clay-green-700 transition-colors">Call</span>
+                  <span className="text-xs sm:text-sm font-medium text-ink-muted group-hover:text-clay-green-700 transition-colors">Call</span>
                 </a>
                 <a href={contact.emailHref} className="flex flex-col items-center gap-1.5 group cursor-pointer">
-                  <span className="flex size-11 sm:size-12 items-center justify-center rounded-full bg-clay-mint border-[2px] border-clay-green-700 text-clay-green-700 transition-all duration-200 group-hover:bg-clay-green-700 group-hover:text-white group-hover:scale-105">
-                    <Mail className="size-4.5 sm:size-5" />
+                  <span className="flex size-12 sm:size-14 items-center justify-center rounded-full bg-clay-mint/80 border border-clay-green-200 text-clay-green-700 transition-all duration-200 group-hover:bg-clay-green-700 group-hover:text-white group-hover:scale-105 backdrop-blur-sm shadow-[0_4px_16px_rgba(0,0,0,0.08)]">
+                    <Mail className="size-5 sm:size-6" />
                   </span>
-                  <span className="text-xs font-medium text-ink-muted group-hover:text-clay-green-700 transition-colors">Email</span>
+                  <span className="text-xs sm:text-sm font-medium text-ink-muted group-hover:text-clay-green-700 transition-colors">Email</span>
                 </a>
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1.5 group cursor-pointer">
-                  <span className="flex size-11 sm:size-12 items-center justify-center rounded-full bg-clay-mint border-[2px] border-clay-green-700 text-clay-green-700 transition-all duration-200 group-hover:bg-clay-green-700 group-hover:text-white group-hover:scale-105">
-                    <MessageCircle className="size-4.5 sm:size-5" />
+                  <span className="flex size-12 sm:size-14 items-center justify-center rounded-full bg-clay-mint/80 border border-clay-green-200 text-clay-green-700 transition-all duration-200 group-hover:bg-clay-green-700 group-hover:text-white group-hover:scale-105 backdrop-blur-sm shadow-[0_4px_16px_rgba(0,0,0,0.08)]">
+                    <MessageCircle className="size-5 sm:size-6" />
                   </span>
-                  <span className="text-xs font-medium text-ink-muted group-hover:text-clay-green-700 transition-colors">WhatsApp</span>
+                  <span className="text-xs sm:text-sm font-medium text-ink-muted group-hover:text-clay-green-700 transition-colors">WhatsApp</span>
                 </a>
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex justify-center mt-6 sm:mt-8">
+              <div className="flex justify-center">
                 <Link
                   href={GOOGLE_FORM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 sm:h-12 items-center gap-2 rounded-full bg-clay-orange-500 border-[3px] border-clay-orange-700 px-6 sm:px-7 font-display text-sm sm:text-base font-bold text-white transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0"
+                  className="inline-flex h-12 sm:h-14 items-center gap-2 rounded-full bg-clay-orange-500 border-[3px] border-clay-orange-700 px-7 sm:px-9 font-display text-sm sm:text-base font-bold text-white transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0"
                   style={{ boxShadow: "0 4px 0 0 #E65100, 0 8px 16px oklch(0 0 0 / 0.2)" }}
                 >
                   Get Started <ArrowRight className="size-4 sm:size-5" />
@@ -81,18 +87,16 @@ export default function Home() {
               </div>
 
               {/* Address */}
-              <div className="flex items-center gap-2 mt-6 text-ink-muted">
+              <div className="flex items-center gap-2 text-ink-muted">
                 <MapPin className="size-4" />
                 <span className="text-xs sm:text-sm">{contact.address}</span>
               </div>
             </div>
 
             {/* Footer */}
-            <div className="py-4 text-center">
+            <div className="py-4 text-center border-t border-clay-green-200/30">
               <p className="text-xs text-ink-muted">
-                © 2025 Tiny Tummies. Made with ♥ by ShravSaga
-                {/* <span className="mx-2">•</span>
-                <Link href="/terms" className="hover:text-clay-green-700 transition-colors">Terms & Conditions</Link> */}
+                © 2026 Tiny Tummies.
               </p>
             </div>
           </PandaBackground>
