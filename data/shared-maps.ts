@@ -74,4 +74,4 @@ export const WHATSAPP_URL_SHORT = "https://wa.me/917975465679";
 export const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSegxxacmX0Udhjpdl_7lcsMVtiVaudhonyVKcfnNwJ9j4-tTA/viewform";
 
 /* ── Section IDs for scroll navigation ── */
-export const SECTION_IDS = ["hero", "how", "pricing", "about", "contact"] as const;
+export const SECTION_IDS = ["hero", "how", "pricing", "gallery", "about", "contact"] as const;

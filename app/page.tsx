@@ -7,6 +7,7 @@ import Navbar from "@/components/claymorph/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
 import PricingSection from "@/components/sections/PricingSection";
+import GallerySection from "@/components/sections/GallerySection";
 import AboutSection from "@/components/sections/AboutSection";
 import { PandaCompanion, Type } from "@/components/claymorph";
 import PandaBackground from "@/components/ui/PandaBackground";
@@ -24,6 +25,7 @@ export default function Home() {
         <HeroSection />
         <HowItWorksSection />
         <PricingSection />
+        <GallerySection />
         <AboutSection />
 
         {/* Contact Section */}
