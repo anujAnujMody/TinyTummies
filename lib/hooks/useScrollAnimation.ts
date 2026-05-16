@@ -11,12 +11,20 @@ interface UseScrollAnimationOptions {
 export function useScrollAnimation<T extends HTMLElement>(
   options: UseScrollAnimationOptions = {}
 ) {
-  const { threshold = 0.15, rootMargin = "-40px 0px", triggerOnce = true } = options;
+  const { threshold = 0.1, rootMargin = "0px 0px -50px 0px", triggerOnce = true } = options;
   const ref = useRef<T>(null);
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
+
+    // Check if already visible on mount
+    const rect = element.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    if (isVisible) {
+      element.classList.add("is-visible");
+      if (triggerOnce) return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -45,7 +53,7 @@ export function useScrollAnimation<T extends HTMLElement>(
 export function useStaggerAnimation<T extends HTMLElement>(
   options: UseScrollAnimationOptions = {}
 ) {
-  const { threshold = 0.1, rootMargin = "0px", triggerOnce = true } = options;
+  const { threshold = 0.1, rootMargin = "0px 0px -50px 0px", triggerOnce = true } = options;
   const ref = useRef<T>(null);
 
   useEffect(() => {
@@ -54,6 +62,19 @@ export function useStaggerAnimation<T extends HTMLElement>(
 
     const children = element.querySelectorAll("[data-animate]");
     if (children.length === 0) return;
+
+    // Check if already visible on mount
+    const rect = element.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    if (isVisible) {
+      children.forEach((child) => {
+        const delay = parseFloat(child.getAttribute("data-animate-delay") || "0");
+        setTimeout(() => {
+          child.classList.add("is-visible");
+        }, delay * 1000);
+      });
+      if (triggerOnce) return;
+    }
 
     const timers: ReturnType<typeof setTimeout>[] = [];
 
