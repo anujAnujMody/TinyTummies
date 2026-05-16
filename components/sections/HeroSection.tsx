@@ -135,7 +135,7 @@ export default function HeroSection() {
                 </div>
 
                 {/* Mascot peeking from bottom-right */}
-                <div className="absolute -bottom-10 -right-10 w-[150px] md:w-[180px] lg:w-[200px] z-20">
+                <div className="absolute -bottom-30 -right-20 w-[150px] md:w-[180px] lg:w-[200px] z-20">
                   <Image
                     src="/mascot/panda-mascot.png"
                     alt="Tiny Tummies mascot"
