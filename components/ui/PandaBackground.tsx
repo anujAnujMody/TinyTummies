@@ -7,6 +7,7 @@ interface PandaBackgroundProps {
   className?: string;
   style?: React.CSSProperties;
   count?: number;
+  showMascots?: boolean;
 }
 
 const pandaImages = [
@@ -63,8 +64,8 @@ function generatePandas(count: number) {
 
 const pandas = generatePandas(7);
 
-export default function PandaBackground({ children, className, style, count = 7 }: PandaBackgroundProps) {
-  const displayPandas = count === 7 ? pandas : generatePandas(count);
+export default function PandaBackground({ children, className, style, count = 7, showMascots = false }: PandaBackgroundProps) {
+  const displayPandas = showMascots ? (count === 7 ? pandas : generatePandas(count)) : [];
 
   return (
     <div className={`relative flex flex-col ${className ?? ""}`} style={style}>
@@ -87,7 +88,7 @@ export default function PandaBackground({ children, className, style, count = 7 
         ))}
       </div>
 
-      <div className="relative z-10 flex flex-col flex-1">
+      <div className="relative z-10 flex flex-col">
         {children}
       </div>
     </div>

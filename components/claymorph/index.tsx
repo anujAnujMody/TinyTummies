@@ -60,7 +60,7 @@ export function ClaySection({
     <section
       id={id}
       className={cn(
-        "relative isolate snap-start snap-always h-screen flex flex-col overflow-hidden",
+        "relative isolate min-h-screen flex flex-col overflow-hidden",
         toneBg[tone],
         className,
       )}

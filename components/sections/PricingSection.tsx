@@ -3,7 +3,7 @@
 import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { Check } from "lucide-react";
-import { cn, clayShadow } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { plans, whyChooseFeatures } from "@/data/pricing";
 import { planIconMap, planColorMap } from "@/data/shared-maps";
 import FeatureBar from "@/components/ui/FeatureBar";
@@ -26,13 +26,12 @@ export default function PricingSection() {
   }, []);
 
   return (
-    <PandaBackground count={3} className="snap-start snap-always min-h-[100dvh] flex flex-col">
-      <section id="pricing" className="relative flex flex-col flex-1">
-        <div className="w-full px-4 md:px-[3vw] pt-20 md:pt-[calc(72px+2vh)] pb-3 md:pb-[1.5vh] flex flex-col flex-1">
-          <div className="flex-1 flex items-center justify-center">
-            <div className="flex flex-col gap-3 md:gap-[2vh] max-w-250 mx-auto w-full">
+    <PandaBackground count={3} className="flex flex-col">
+      <section id="pricing" className="relative flex flex-col py-12 md:py-24">
+        <div className="w-full px-4 sm:px-5 md:px-[5vw] flex flex-col">
+          <div className="flex flex-col gap-6 md:gap-12 max-w-250 mx-auto w-full">
               <div className="text-center shrink-0">
-                <h2 className="font-display text-xl md:text-[clamp(1.5rem,4.5vh,3rem)] font-bold leading-[1.05] tracking-tight text-clay-green-900 max-[380px]:text-lg">
+                <h2 className="font-display text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold leading-tight tracking-tight text-clay-green-900">
                   Simple plans, <span className="text-clay-green-700">healthy</span>{" "}
                   <span className="text-clay-orange-500">happiness.</span>
                 </h2>
@@ -40,7 +39,7 @@ export default function PricingSection() {
 
               <div
                 ref={carouselRef}
-                className="flex overflow-x-auto snap-x snap-mandatory gap-3 w-full scrollbar-hide items-stretch md:grid md:grid-cols-3 md:gap-[1.5vw] md:overflow-visible md:items-stretch"
+                className="flex overflow-x-auto gap-3 sm:gap-4 w-full scrollbar-hide items-stretch md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:items-stretch"
               >
                 {plans.map((plan, i) => {
                   const colors = planColorMap[plan.color] ?? planColorMap.green;
@@ -51,61 +50,61 @@ export default function PricingSection() {
                     <div
                       key={plan.id}
                       className={cn(
-                        "relative flex flex-col rounded-xl md:rounded-md border-[3px] p-2.5 md:p-[1.2vh] transition-all duration-200 hover:translate-y-0.5 min-w-[80vw] snap-center flex-shrink-0 md:min-w-0 md:w-full md:flex-shrink-1",
+                        "relative flex flex-col rounded-2xl p-4 sm:p-5 md:p-6 transition-all duration-200 hover:-translate-y-1 min-w-[85vw] flex-shrink-0 md:min-w-0 md:w-full md:flex-shrink-1 bg-white",
                         colors.cardBg,
                         colors.cardBorder
                       )}
                       style={{
                         animationDelay: `${i * 0.1}s`,
-                        boxShadow: clayShadow("clay"),
+                        boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
                       }}
                     >
                       {isPopular && (
-                        <div className="absolute -top-2.5 md:-top-[2.5vh] left-1/2 -translate-x-1/2 z-10">
-                          <span className="inline-flex items-center rounded-full bg-clay-orange-500 px-2.5 py-0.5 md:px-[1vw] md:py-[0.4vh] font-display text-[9px] md:text-[clamp(8px,1vh,10px)] font-bold text-white">
+                        <div className="absolute -top-2.5 sm:-top-3 left-1/2 -translate-x-1/2 z-10">
+                          <span className="inline-flex items-center rounded-full bg-clay-orange-500 px-2.5 sm:px-3 py-0.5 sm:py-1 font-display text-[10px] sm:text-xs font-bold text-white whitespace-nowrap">
                             Most Popular
                           </span>
                         </div>
                       )}
 
-                      <div className="flex justify-center mb-1 md:mb-[0.8vh] mt-3">
-                        <span className={cn("flex size-8 md:size-[clamp(32px,4.5vh,44px)] items-center justify-center rounded-full", colors.iconBg)}>
-                          <Icon className={cn("size-4 md:size-[clamp(16px,2.2vh,22px)]", colors.iconColor)} strokeWidth={2} />
+                      <div className="flex justify-center mb-2 sm:mb-3 mt-1 sm:mt-2">
+                        <span className={cn("flex size-10 sm:size-11 md:size-12 items-center justify-center rounded-full", colors.iconBg)}>
+                          <Icon className={cn("size-5 sm:size-5.5 md:size-6", colors.iconColor)} strokeWidth={2} />
                         </span>
                       </div>
 
-                      <h3 className={cn("font-display text-xs md:text-[clamp(13px,2vh,17px)] font-bold text-center max-[380px]:text-[11px]", colors.nameColor)}>
+                      <h3 className={cn("font-display text-sm sm:text-base md:text-base font-bold text-center", colors.nameColor)}>
                         {plan.name}
                       </h3>
-                      <p className="font-body text-[10px] md:text-[clamp(9px,1.3vh,11px)] text-ink-muted text-center mt-0.5 max-[380px]:text-[9px]">
+                      <p className="font-body text-xs text-ink-muted text-center mt-0.5 sm:mt-1">
                         {plan.tagline}
                       </p>
 
-                      <div className="text-center mt-1 md:mt-[0.8vh]">
-                        <span className="font-display text-base md:text-[clamp(18px,3vh,26px)] font-bold text-ink max-[380px]:text-base">
+                      <div className="text-center mt-2 sm:mt-3">
+                        <span className="font-display text-xl sm:text-2xl md:text-2xl font-bold text-ink">
                           {plan.price}
                         </span>
-                        <span className="font-body text-[10px] md:text-[clamp(9px,1.3vh,11px)] text-ink-muted max-[380px]:text-[9px]">{plan.period}</span>
+                        <span className="font-body text-xs text-ink-muted">{plan.period}</span>
                       </div>
-                      <p className={cn("font-body text-[8px] md:text-[clamp(8px,1vh,10px)] text-center mt-0.5 font-medium max-[380px]:text-[8px]", colors.perMealColor)}>
+                      <p className={cn("font-body text-xs text-center mt-0.5 sm:mt-1 font-medium", colors.perMealColor)}>
                         {plan.perMeal}
                       </p>
 
                       <div className="flex-grow">
-                        <ul className="flex flex-col gap-0.5 md:gap-[0.6vh] mt-1.5 md:mt-[1vh]">
+                        <ul className="flex flex-col gap-1.5 sm:gap-2 mt-3 sm:mt-4">
                           {plan.features.map((feature) => (
-                            <li key={feature} className="flex items-center gap-1.5 md:gap-[0.6vw]">
-                              <span className={cn("flex size-3.5 md:size-[clamp(14px,1.8vh,16px)] shrink-0 items-center justify-center rounded-full max-[380px]:size-3", colors.checkColor)}>
-                                <Check className="size-2 md:size-[clamp(8px,1vh,10px)] text-white max-[380px]:size-2" strokeWidth={3} />
+                            <li key={feature} className="flex items-center gap-2">
+                              <span className={cn("flex size-4 shrink-0 items-center justify-center rounded-full", colors.checkColor)}>
+                                <Check className="size-2.5 text-white" strokeWidth={3} />
                               </span>
-                              <span className="font-body text-[10px] md:text-[clamp(9px,1.3vh,11px)] text-ink max-[380px]:text-[9px]">{feature}</span>
+                              <span className="font-body text-xs sm:text-xs md:text-sm text-ink">{feature}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <div className="flex justify-end pt-1 md:pt-[0.5vh]">
-                        <div className="w-14 h-14 md:w-[clamp(70px,10vh,100px)] md:h-[clamp(70px,10vh,100px)] relative max-[380px]:w-12 max-[380px]:h-12">
+                      <div className="flex justify-end pt-2 sm:pt-3">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 relative">
                           <Image
                             src={`/images/pandas/${pandaImages[i]}`}
                             alt=""
@@ -118,11 +117,10 @@ export default function PricingSection() {
                   );
                 })}
               </div>
-            </div>
           </div>
 
           {/* bottom: Why parents choose Tiny Tummies */}
-          <div className="pt-3 md:pt-4">
+          <div className="mt-12 md:mt-16">
             <FeatureBar
               title="Why parents choose Tiny Tummies"
               titleAccent="&#9829;"

@@ -14,13 +14,7 @@ export function staggerDelay(index: number, base = 0.08, step = 0.06): string {
 export function scrollToSection(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
-  const container = document.getElementById("main");
-  if (container) {
-    const containerRect = container.getBoundingClientRect();
-    const elRect = el.getBoundingClientRect();
-    const scrollTop = container.scrollTop + elRect.top - containerRect.top;
-    container.scrollTo({ top: scrollTop, behavior: "smooth" });
-  } else {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  const offset = 80; // navbar height + padding
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top, behavior: "smooth" });
 }

@@ -1,14 +1,30 @@
 import { spawn } from "child_process";
+import net from "net";
 
-const next = spawn("npx", ["next", "start"], { stdio: "inherit", shell: true });
+const next = spawn("npx", ["serve@latest", "out"], { stdio: "inherit", shell: true });
 
-setTimeout(() => {
-  const ngrok = spawn("ngrok", ["http", "3000"], { stdio: "inherit", shell: true });
-  ngrok.on("close", (code) => {
-    next.kill();
-    process.exit(code ?? 0);
+function waitForPort(port, interval = 500) {
+  return new Promise((resolve) => {
+    const tryConnect = () => {
+      const socket = net.createConnection({ port }, () => {
+        socket.end();
+        resolve();
+      });
+      socket.on("error", () => {
+        setTimeout(tryConnect, interval);
+      });
+    };
+    tryConnect();
   });
-}, 3000);
+}
+
+await waitForPort(3000);
+
+const ngrok = spawn("ngrok", ["http", "3000"], { stdio: "inherit", shell: true });
+ngrok.on("close", (code) => {
+  next.kill();
+  process.exit(code ?? 0);
+});
 
 process.on("SIGINT", () => {
   next.kill();

@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SITE_NAME, SITE_URL } from "@/data/site";
 import { OrganizationSchema, ServiceSchema, FAQSchema } from "@/components/seo";
+import SmoothScroll from "@/components/islands/SmoothScroll";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -89,7 +90,9 @@ export default function RootLayout({
         <OrganizationSchema />
         <ServiceSchema />
         <FAQSchema />
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

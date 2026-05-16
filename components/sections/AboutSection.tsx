@@ -13,23 +13,23 @@ export default function AboutSection() {
   const { ref: timelineRef } = useStaggerAnimation<HTMLDivElement>({ threshold: 0.1 });
 
   return (
-<section id="about" className="snap-start snap-always min-h-[100dvh] md:h-screen">
-      <PandaBackground className="h-full" count={3}>
-        <div className="h-full px-5 md:px-[4vw] pt-20 md:pt-[100px] pb-4 md:pb-[2vh] flex flex-col gap-4 md:gap-[2vh]">
+    <section id="about">
+      <PandaBackground className="h-full" showMascots={false}>
+        <div className="h-full px-4 sm:px-5 md:px-[5vw] py-12 sm:py-16 md:py-24 flex flex-col gap-8 sm:gap-10 md:gap-14">
           {/* Row 1: Mission */}
           <div ref={missionRef} className="animate-on-scroll fade-up text-center shrink-0">
-            <h2 className="font-display text-xl md:text-[clamp(20px,3.5vh,32px)] font-bold text-clay-green-900 leading-tight max-[380px]:text-lg">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-clay-green-900 leading-tight max-w-3xl mx-auto">
               We&apos;re on a mission to{" "}
               <span className="text-clay-orange-500">nourish little tummies</span>{" "}
               and build a healthier tomorrow.
             </h2>
-            <p className="font-body text-sm md:text-[clamp(13px,1.8vh,15px)] text-ink-muted mt-2 md:mt-[1vh] leading-relaxed max-w-2xl mx-auto max-[380px]:text-xs">
+            <p className="font-body text-sm sm:text-sm md:text-base text-ink-muted mt-3 sm:mt-4 leading-relaxed max-w-2xl mx-auto">
               Tiny Tummies is more than just a meal service. We&apos;re a team of nutritionists, chefs, parents and caregivers who believe every child deserves real food, made with love.
             </p>
           </div>
 
           {/* Row 2: 3 Value Cards */}
-          <div ref={valueCardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[1.5vw] shrink-0">
+          <div ref={valueCardsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 md:gap-6 shrink-0">
             {valueCards.map((card, i) => {
               const Icon = card.icon;
               return (
@@ -37,15 +37,15 @@ export default function AboutSection() {
                   key={card.title}
                   data-animate
                   data-animate-delay={(0.15 + i * 0.06).toFixed(2)}
-                  className="animate-on-scroll fade-up rounded-[14px] border-2 border-white bg-white/95 px-4 md:px-[1.5vw] py-4 md:py-[2.5vh] shadow-[0_2px_0_0_#B9DFA0,0_4px_8px_oklch(0_0 0/0.05)] flex flex-col items-center text-center"
+                  className="animate-on-scroll fade-up rounded-2xl bg-white/80 px-4 sm:px-5 md:px-6 py-5 sm:py-6 md:py-8 shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-1"
                 >
-                  <span className={`flex size-10 md:size-[clamp(36px,4.5vh,44px)] items-center justify-center rounded-full ring-2 ${card.bg} ${card.ring} max-[380px]:size-9`}>
-                    <Icon className={`size-5 md:size-[clamp(18px,2.2vh,22px)] ${card.color}`} strokeWidth={2} />
+                  <span className={`flex size-11 sm:size-12 md:size-14 items-center justify-center rounded-full ring-2 ${card.bg} ${card.ring}`}>
+                    <Icon className={`size-5 sm:size-6 md:size-7 ${card.color}`} strokeWidth={2} />
                   </span>
-                  <h3 className={`font-display text-sm md:text-[clamp(14px,2vh,17px)] font-bold mt-2 md:mt-[1.2vh] ${card.color} max-[380px]:text-xs`}>
+                  <h3 className={`font-display text-sm sm:text-base md:text-lg font-bold mt-3 sm:mt-4 ${card.color}`}>
                     {card.title}
                   </h3>
-                  <p className="font-body text-xs md:text-[clamp(12px,1.4vh,13px)] text-ink-muted mt-1.5 md:mt-[0.8vh] leading-relaxed max-[380px]:text-[10px]">
+                  <p className="font-body text-xs sm:text-sm text-ink-muted mt-1.5 sm:mt-2 leading-relaxed">
                     {card.text}
                   </p>
                 </div>
@@ -56,41 +56,45 @@ export default function AboutSection() {
           {/* Row 3: Our Story */}
           <div
             ref={storyRef}
-            className="animate-on-scroll fade-up rounded-2xl border-2 border-white/60 bg-white/70 px-4 md:px-[3vw] py-4 md:py-[2vh] shadow-[0_2px_0_0_#B9DFA0,0_4px_8px_oklch(0_0 0/0.05)] flex-1 min-h-0 flex flex-col"
+            className="animate-on-scroll fade-up rounded-2xl bg-gradient-to-br from-clay-mint/20 to-clay-butter/20 px-5 md:px-8 py-8 md:py-10 shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col relative overflow-hidden"
           >
-            <div className="flex items-center justify-center gap-2 md:gap-[0.8vw]">
-              <Leaf className="size-4 md:size-[clamp(14px,1.8vh,16px)] text-clay-green-600" strokeWidth={2} />
-              <h3 className="font-display text-lg md:text-[clamp(18px,2.5vh,22px)] font-bold text-clay-green-900 max-[380px]:text-base">
+            {/* Organic gradient blob accent */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-clay-mint/10 blur-3xl pointer-events-none blob-outer" />
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 rounded-full bg-clay-butter/15 blur-3xl pointer-events-none blob-inner" />
+
+            <div className="flex items-center justify-center gap-3 relative z-10">
+              <Leaf className="size-5 md:size-6 text-clay-green-600" strokeWidth={2} />
+              <h3 className="font-display text-xl md:text-2xl font-bold text-clay-green-900">
                 Our Story
               </h3>
-              <Leaf className="size-4 md:size-[clamp(14px,1.8vh,16px)] text-clay-green-600 rotate-180" strokeWidth={2} />
+              <Leaf className="size-5 md:size-6 text-clay-green-600 rotate-180" strokeWidth={2} />
             </div>
 
-            <div className="mt-3 md:mt-[1.5vh] text-center">
-              <p className="font-body text-sm md:text-[clamp(13px,1.6vh,15px)] text-ink-muted leading-relaxed max-[380px]:text-xs">
+            <div className="mt-6 text-center relative z-10">
+              <p className="font-body text-sm md:text-base text-ink-muted leading-relaxed">
                 It all started with a simple question from a mom:
               </p>
-              <p className="font-body text-base md:text-[clamp(15px,2vh,18px)] text-clay-green-800 font-semibold mt-1.5 md:mt-[0.8vh] leading-relaxed max-[380px]:text-sm">
+              <p className="font-body text-lg md:text-xl text-clay-green-800 font-semibold mt-3 leading-relaxed">
                 &ldquo;What can I give my child every day that&apos;s healthy, tasty and worry-free?&rdquo;
               </p>
-              <p className="font-body text-sm md:text-[clamp(13px,1.6vh,15px)] text-ink-muted mt-1.5 md:mt-[0.8vh] max-[380px]:text-xs">
+              <p className="font-body text-sm md:text-base text-ink-muted mt-3">
                 That question became Tiny Tummies.
               </p>
             </div>
 
             {/* Timeline */}
-            <div ref={timelineRef} className="relative mt-3 md:mt-[1.5vh] flex-1 flex flex-col justify-center min-h-0">
-              {/* Desktop: Original 2-row layout with dashed line */}
+            <div ref={timelineRef} className="relative mt-8 flex flex-col justify-center relative z-10">
+              {/* Desktop: 2-row layout with gradient line */}
               <div className="hidden md:block relative">
-                <div className="absolute top-1/2 -translate-y-1/2 left-[10%] right-[10%] border-t-2 border-dashed border-clay-green-200 z-0" />
-                <div className="grid grid-cols-5 gap-[1vw] relative z-10">
+                <div className="absolute top-1/2 -translate-y-1/2 left-[10%] right-[10%] h-[3px] bg-gradient-to-r from-clay-green-200 via-clay-mint-300 to-clay-orange-200 rounded-full z-0" />
+                <div className="grid grid-cols-5 gap-6 relative z-10">
                   {timeline.map((step) => {
                     const Icon = step.icon;
                     const isOrange = step.tone === "orange";
                     return (
                       <div key={step.title} className="flex justify-center">
-                        <span className={`flex size-[clamp(28px,3.5vh,34px)] items-center justify-center rounded-full border-2 shadow-xs bg-white ${isOrange ? "border-clay-orange-200" : "border-clay-green-200"}`}>
-                          <Icon className={`size-[clamp(14px,1.8vh,17px)] ${isOrange ? "text-clay-orange-500" : "text-clay-green-700"}`} strokeWidth={2} />
+                        <span className={`flex size-10 items-center justify-center rounded-full border border-clay-green-200/50 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] ${isOrange ? "border-clay-orange-200/50" : "border-clay-green-200/50"}`}>
+                          <Icon className={`size-5 ${isOrange ? "text-clay-orange-500" : "text-clay-green-700"}`} strokeWidth={2} />
                         </span>
                       </div>
                     );
@@ -98,7 +102,7 @@ export default function AboutSection() {
                 </div>
               </div>
 
-              <div className="hidden md:grid grid-cols-5 gap-[1vw] mt-[0.8vh]">
+              <div className="hidden md:grid grid-cols-5 gap-6 mt-4">
                 {timeline.map((step, i) => {
                   const isOrange = step.tone === "orange";
                   return (
@@ -108,10 +112,10 @@ export default function AboutSection() {
                       data-animate-delay={(0.25 + i * 0.06).toFixed(2)}
                       className="animate-on-scroll fade-up flex flex-col items-center text-center"
                     >
-                      <h4 className={`font-display text-[clamp(12px,1.6vh,14px)] font-bold ${isOrange ? "text-clay-orange-500" : "text-clay-green-700"}`}>
+                      <h4 className={`font-display text-sm font-bold ${isOrange ? "text-clay-orange-500" : "text-clay-green-700"}`}>
                         {step.title}
                       </h4>
-                      <p className="font-body text-[clamp(11px,1.3vh,12px)] text-ink-muted mt-[0.4vh] leading-relaxed px-[0.3vw]">
+                      <p className="font-body text-xs text-ink-muted mt-1 leading-relaxed px-2">
                         {step.text}
                       </p>
                     </div>
@@ -119,8 +123,8 @@ export default function AboutSection() {
                 })}
               </div>
 
-              {/* Mobile: Combined icon+text horizontal scroll */}
-              <div className="flex md:hidden overflow-x-auto snap-x snap-mandatory gap-3 w-full scrollbar-hide">
+              {/* Mobile: Combined icon+text horizontal scroll without snap */}
+              <div className="flex md:hidden overflow-x-auto gap-4 w-full scrollbar-hide pb-2">
                 {timeline.map((step, i) => {
                   const Icon = step.icon;
                   const isOrange = step.tone === "orange";
@@ -129,9 +133,9 @@ export default function AboutSection() {
                       key={step.title}
                       data-animate
                       data-animate-delay={(0.25 + i * 0.06).toFixed(2)}
-                      className="animate-on-scroll fade-up flex flex-col items-center text-center min-w-[140px] snap-center"
+                      className="animate-on-scroll fade-up flex flex-col items-center text-center min-w-[140px]"
                     >
-                      <span className={`flex size-10 items-center justify-center rounded-full border-2 shadow-xs bg-white ${isOrange ? "border-clay-orange-200" : "border-clay-green-200"}`}>
+                      <span className={`flex size-10 items-center justify-center rounded-full border border-clay-green-200/50 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] ${isOrange ? "border-clay-orange-200/50" : "border-clay-green-200/50"}`}>
                         <Icon className={`size-5 ${isOrange ? "text-clay-orange-500" : "text-clay-green-700"}`} strokeWidth={2} />
                       </span>
                       <h4 className={`font-display text-sm font-bold mt-2 ${isOrange ? "text-clay-orange-500" : "text-clay-green-700"}`}>
@@ -153,7 +157,7 @@ export default function AboutSection() {
               title="Why Parents"
               titleAccent="Trust Us"
               items={aboutFeatures}
-              columns={5}
+              columns={4}
             />
           </div>
         </div>
